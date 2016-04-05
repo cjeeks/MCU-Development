@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>1049017456</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\net.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\inttypes.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ystdio.h</file>
+      <file>$TOOLKIT_DIR$\config\lnk430F5438A.xcl</file>
+      <file>$PROJ_DIR$\Debug\Obj\timeout.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\LCD.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\GPIO.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\msp430x54x.h</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\SteperMoto.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\TP.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\LCD.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\body.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdint.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\DTH11.r43</file>
+      <file>$PROJ_DIR$\PIN_DEF.H</file>
+      <file>$PROJ_DIR$\Debug\Obj\TP.pbi</file>
+      <file>$PROJ_DIR$\timeout.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\LED_ARRAY.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Relay.pbi</file>
+      <file>$PROJ_DIR$\adc.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tm1638.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\string.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\gas.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\net_main.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\SteperMoto.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\msp430f5438a.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tm1638.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\gas.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\DCMoto.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\RS232.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\ADC.pbi</file>
+      <file>$PROJ_DIR$\enc28j60.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ip_arp_udp.pbi</file>
+      <file>$PROJ_DIR$\body.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\DDPLAY.pbi</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\MSP430-demo.pbd</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\MSP430-demo.d43</file>
+      <file>$PROJ_DIR$\Debug\Obj\ADC.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\DDPLAY.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\timeout.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Relay.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\bmp085.r43</file>
+      <file>$TOOLKIT_DIR$\config\multiplier32_loc2.xcl</file>
+      <file>$PROJ_DIR$\Debug\Obj\RS232.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\DCMoto.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\DTH11.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bmp085.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\body.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\net_main.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\LED_ARRAY.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\enc28j60.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\enc28j60.pbi</file>
+      <file>$PROJ_DIR$\ip_arp_udp.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ip_arp_udp.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\TP.c</file>
+      <file>$PROJ_DIR$\TP.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.h</file>
+      <file>$PROJ_DIR$\gas.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\GPIO.r43</file>
+      <file>$PROJ_DIR$\GPIO.c</file>
+      <file>$PROJ_DIR$\GPIO.h</file>
+      <file>$PROJ_DIR$\ip_arp_udp.c</file>
+      <file>$PROJ_DIR$\LCD.c</file>
+      <file>$PROJ_DIR$\bmp085.h</file>
+      <file>$PROJ_DIR$\ADC.c</file>
+      <file>$PROJ_DIR$\LCD.h</file>
+      <file>$PROJ_DIR$\LED_ARRAY.c</file>
+      <file>$PROJ_DIR$\LED_ARRAY.h</file>
+      <file>$PROJ_DIR$\macro.h</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\DCMoto.h</file>
+      <file>$PROJ_DIR$\DDPLAY.c</file>
+      <file>$PROJ_DIR$\DDPLAY.h</file>
+      <file>$PROJ_DIR$\DTH11.c</file>
+      <file>$PROJ_DIR$\dth11.h</file>
+      <file>$PROJ_DIR$\enc28j60.c</file>
+      <file>$PROJ_DIR$\gas.c</file>
+      <file>$PROJ_DIR$\body.c</file>
+      <file>$PROJ_DIR$\bmp085.c</file>
+      <file>$PROJ_DIR$\DCMoto.c</file>
+      <file>$PROJ_DIR$\net_main.c</file>
+      <file>$PROJ_DIR$\Relay.c</file>
+      <file>$PROJ_DIR$\Relay.h</file>
+      <file>$PROJ_DIR$\RS232.c</file>
+      <file>$PROJ_DIR$\RS232.h</file>
+      <file>$PROJ_DIR$\SteperMoto.c</file>
+      <file>$PROJ_DIR$\SteperMoto.h</file>
+      <file>$PROJ_DIR$\timeout.c</file>
+      <file>$PROJ_DIR$\tm1638.c</file>
+      <file>$PROJ_DIR$\tm1638.h</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 47</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\MSP430-demo.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 37 55 41 56 6 11 61 54 22 29 19 57 59 64 26 39 44 27 4 33</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\MSP430-demo.d43</name>
+      <inputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 3 53 48 35 49 17 72 5 21 36 51 9 10 52 12 62 34 66 58 60 50 24 42</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TP.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 10</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 69</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 69</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\GPIO.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 6</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 72</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 74</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 74</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ip_arp_udp.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 39</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 66</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0 38</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 0 38 1 14 16 32 67 70 28 43 13</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\LCD.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 11</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 5</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 79</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 79</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ADC.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 37</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 48</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 23</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 23</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\LED_ARRAY.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 61</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 21</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 81</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 81</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 58</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98 82 88 81 79 96 86 84 100 103 71 40 23 77 69</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 63 14 32 67 70 28 43 13 46 31 2 25 98 82 88 81 79 96 86 84 100 103 71 40 23 77 69</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DDPLAY.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 41</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 49</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 86 82</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 86 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DTH11.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 56</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 17</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 88 98</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 88 98 63 14 32 67 70 28 43 13 46</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\enc28j60.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 64</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 62</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 18 38 20</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 7 15 8 63 14 32 67 70 28 43 13 46 31 2 18 38 1 16 20</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\gas.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 26</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 34</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 71</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 71</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\body.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 59</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 12</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 40</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 40</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\bmp085.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 57</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 52</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 77</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 77</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DCMoto.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 35</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 84 82</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 84 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net_main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 27</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 60</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 18 38 65 20 0</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 7 15 8 63 14 32 67 70 28 43 13 46 31 2 18 38 1 16 65 20 0</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Relay.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 22</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 51</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 96</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 96</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\RS232.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 36</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98 82 74</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 25 14 32 67 70 28 43 13 46 98 82 74</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\SteperMoto.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 29</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 9</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 100</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30 15 8 82 100</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\timeout.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 50</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 20</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 20 7 15 8 63 14 32 67 70 28 43 13 46 31 2</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm1638.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 33</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 24</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 103 82 79</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 103 30 15 8 82 79</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs>
+      <file>$PROJ_DIR$\net.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\inttypes.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ystdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\msp430x54x.h</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdint.h</file>
+      <file>$PROJ_DIR$\Release\Obj\ADC.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\net_main.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\ip_arp_udp.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\bmp085.r43</file>
+      <file>$PROJ_DIR$\PIN_DEF.H</file>
+      <file>$PROJ_DIR$\timeout.h</file>
+      <file>$PROJ_DIR$\adc.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\string.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
+      <file>$TOOLKIT_DIR$\inc\msp430f5438a.h</file>
+      <file>$PROJ_DIR$\Release\Obj\RS232.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\SteperMoto.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\timeout.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\tm1638.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\TP.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+      <file>$PROJ_DIR$\enc28j60.h</file>
+      <file>$PROJ_DIR$\body.h</file>
+      <file>$PROJ_DIR$\Release\Obj\main.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\Relay.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\SteperMoto.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\timeout.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\tm1638.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\DCMoto.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\DDPLAY.pbi</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.r43</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\config\multiplier32_loc2.xcl</file>
+      <file>$PROJ_DIR$\Release\Exe\MSP430-demo.txt</file>
+      <file>$PROJ_DIR$\Release\Obj\MSP430-demo.pbd</file>
+      <file>$TOOLKIT_DIR$\config\lnkCC430F5133.xcl</file>
+      <file>$PROJ_DIR$\Release\Obj\DTH11.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\enc28j60.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\gas.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\GPIO.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\body.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\LCD.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\LED_ARRAY.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\ip_arp_udp.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\GPIO.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\LCD.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\LED_ARRAY.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\net_main.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\Relay.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
+      <file>$PROJ_DIR$\ip_arp_udp.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\TP.c</file>
+      <file>$PROJ_DIR$\TP.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.h</file>
+      <file>$PROJ_DIR$\Release\Obj\TP.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\bmp085.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\ADC.pbi</file>
+      <file>$PROJ_DIR$\Release\Obj\DTH11.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\body.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\DCMoto.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\DDPLAY.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\enc28j60.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\gas.r43</file>
+      <file>$PROJ_DIR$\Release\Obj\RS232.r43</file>
+      <file>$PROJ_DIR$\gas.h</file>
+      <file>$PROJ_DIR$\GPIO.c</file>
+      <file>$PROJ_DIR$\GPIO.h</file>
+      <file>$PROJ_DIR$\ip_arp_udp.c</file>
+      <file>$PROJ_DIR$\LCD.c</file>
+      <file>$PROJ_DIR$\bmp085.h</file>
+      <file>$PROJ_DIR$\ADC.c</file>
+      <file>$PROJ_DIR$\LCD.h</file>
+      <file>$PROJ_DIR$\LED_ARRAY.c</file>
+      <file>$PROJ_DIR$\LED_ARRAY.h</file>
+      <file>$PROJ_DIR$\macro.h</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\DCMoto.h</file>
+      <file>$PROJ_DIR$\DDPLAY.c</file>
+      <file>$PROJ_DIR$\DDPLAY.h</file>
+      <file>$PROJ_DIR$\DTH11.c</file>
+      <file>$PROJ_DIR$\dth11.h</file>
+      <file>$PROJ_DIR$\enc28j60.c</file>
+      <file>$PROJ_DIR$\gas.c</file>
+      <file>$PROJ_DIR$\body.c</file>
+      <file>$PROJ_DIR$\bmp085.c</file>
+      <file>$PROJ_DIR$\DCMoto.c</file>
+      <file>$PROJ_DIR$\net_main.c</file>
+      <file>$PROJ_DIR$\Relay.c</file>
+      <file>$PROJ_DIR$\Relay.h</file>
+      <file>$PROJ_DIR$\RS232.c</file>
+      <file>$PROJ_DIR$\RS232.h</file>
+      <file>$PROJ_DIR$\SteperMoto.c</file>
+      <file>$PROJ_DIR$\SteperMoto.h</file>
+      <file>$PROJ_DIR$\timeout.c</file>
+      <file>$PROJ_DIR$\tm1638.c</file>
+      <file>$PROJ_DIR$\tm1638.h</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 39</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Release\Exe\MSP430-demo.txt</name>
+      <inputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 41 38 9 67 68 65 45 47 48 71 29 30 62 12 66 69 70 11 28 10 31 32 35</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Release\Obj\MSP430-demo.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 64 33 34 42 50 51 52 19 55 20 23 63 46 43 44 49 53 54 21 22</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TP.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 23</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 62</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 60</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 60</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\GPIO.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 45</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 74</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 74</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ip_arp_udp.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 49</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 11</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0 26</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 0 26 1 6 8 25 58 61 17 36 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\LCD.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 47</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 79</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 79</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ADC.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 64</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 9</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 15</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\LED_ARRAY.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 48</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 81</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 81</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 53</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 28</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98 82 88 81 79 96 86 84 100 103 72 27 15 77 60</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 56 6 25 58 61 17 36 5 37 24 2 16 98 82 88 81 79 96 86 84 100 103 72 27 15 77 60</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DDPLAY.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 68</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 86 82</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 86 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DTH11.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 42</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 65</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 88 98</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 88 98 56 6 25 58 61 17 36 5 37</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\enc28j60.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 69</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13 26 14</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 3 7 4 56 6 25 58 61 17 36 5 37 24 2 13 26 1 8 14</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\gas.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 70</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 72</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 72</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\body.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 46</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 66</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 27</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 27</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\bmp085.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 63</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 12</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 77</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 77</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\DCMoto.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 33</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 67</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 84 82</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 84 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net_main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 10</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13 26 57 14 0</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 3 7 4 56 6 25 58 61 17 36 5 37 24 2 13 26 1 8 57 14 0</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Relay.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 29</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 96</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 96</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\RS232.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 71</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98 82 74</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 16 6 25 58 61 17 36 5 37 98 82 74</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\SteperMoto.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 20</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 30</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 100</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 18 7 4 82 100</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\timeout.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 21</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 31</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 14 3 7 4 56 6 25 58 61 17 36 5 37 24 2</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm1638.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 22</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 103 82 79</file>
+        </tool>
+        <tool>
+          <name>ICC430</name>
+          <file> 103 18 7 4 82 79</file>
+        </tool>
+      </inputs>
+    </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

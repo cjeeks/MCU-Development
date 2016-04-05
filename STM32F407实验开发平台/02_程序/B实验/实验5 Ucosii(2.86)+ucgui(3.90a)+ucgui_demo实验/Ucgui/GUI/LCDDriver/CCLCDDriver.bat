@@ -1,0 +1,7 @@
+@ECHO OFF
+
+ECHO CCGUILCDDriver.BAT:  Compiling GUI\LCDDriver
+
+CALL CC LCDDummy
+CALL CC LCDNull
+CALL CC LCDWin

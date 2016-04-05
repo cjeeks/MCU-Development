@@ -1,0 +1,353 @@
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE ENC28J60
+OBJECT MODULE PLACED IN enc28j60.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE ENC28J60\enc28j60.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
+                    -RINT(.\enc28j60.lst) TABS(2) OBJECT(enc28j60.obj)
+
+line level    source
+
+   1          #include "uipopt.h"
+   2          #include "enc28j60.h"
+   3          #include "spi.h"
+   4          
+   5          #define MIN(a,b) (a) < (b) ? (a) : (b)
+   6          idata u8_t Enc28j60Bank;
+   7          idata u16_t NextPacketPtr;
+   8          
+   9          /// ENC28J60 
+  10          void delay_us(int t1)
+  11          {
+  12   1        while(t1--);
+  13   1      }
+  14          
+  15          void delay_ms(int t1)
+  16          { 
+  17   1        idata int i; 
+  18   1        while(t1--) 
+  19   1        {
+  20   2          i=100;
+  21   2          while(i--);
+  22   2        }
+  23   1      }
+  24          
+  25          u8_t enc28j60ReadOp(u8_t op, u8_t address)
+  26          {
+  27   1        u8_t dat1;
+  28   1        // activate CS  
+  29   1        //CSN =0;
+  30   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),~(1 << 6));
+  31   1        // issue read command
+  32   1        WriteByte(op | (address & ADDR_MASK));  
+  33   1        dat1 = ReadByte();
+  34   1        // do dummy read if needed (for mac and mii, see datasheet page 29)
+  35   1        if(address & 0x80)  dat1 = ReadByte();
+  36   1        // release CS
+  37   1        //CSN=1;
+  38   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),0xff);
+  39   1        return(dat1);
+  40   1      }
+  41          
+  42          void enc28j60WriteOp(u8_t op, u8_t address, u8_t mydat)
+  43          {
+  44   1        //CSN=0;
+  45   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),~(1 << 6));
+  46   1        // issue write command
+  47   1        WriteByte( op | (address & ADDR_MASK));
+  48   1        // write data
+  49   1        WriteByte(mydat);
+  50   1        //CSN=1;
+  51   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),0xff);
+  52   1      }
+  53          
+  54          void enc28j60SetBank(u8_t address)
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 2   
+
+  55          {
+  56   1        if((address & BANK_MASK) != Enc28j60Bank)
+  57   1        {
+  58   2          enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, (ECON1_BSEL1|ECON1_BSEL0));
+  59   2          enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, (address & BANK_MASK)>>5);
+  60   2          Enc28j60Bank = (address & BANK_MASK);
+  61   2        }
+  62   1      }
+  63          
+  64          u8_t enc28j60Read(u8_t address)
+  65          {
+  66   1        enc28j60SetBank(address); 
+  67   1        return enc28j60ReadOp(ENC28J60_READ_CTRL_REG, address);
+  68   1      }
+  69          
+  70          void enc28j60Write(u8_t address, u8_t mydat)
+  71          {
+  72   1        enc28j60SetBank(address);
+  73   1        enc28j60WriteOp(ENC28J60_WRITE_CTRL_REG, address, mydat);
+  74   1      }
+  75          
+  76          u16_t enc28j60_read_phyreg(u8_t address)
+  77          {
+  78   1        u16_t mydat;
+  79   1        enc28j60Write(MIREGADR, address);
+  80   1        enc28j60Write(MICMD, MICMD_MIIRD);
+  81   1        
+  82   1        // Loop to wait until the PHY register has been read through the MII
+  83   1        // This requires 10.24us
+  84   1        while( (enc28j60Read(MISTAT) & MISTAT_BUSY) );
+  85   1        
+  86   1        // Stop reading
+  87   1        enc28j60Write(MICMD, MICMD_MIIRD);
+  88   1        
+  89   1        // Obtain results and return
+  90   1        mydat = enc28j60Read ( MIRDL );
+  91   1        mydat |= enc28j60Read ( MIRDH );
+  92   1      
+  93   1        return mydat;
+  94   1      }
+  95          
+  96          void enc28j60PhyWrite(u8_t address, u16_t mydat)
+  97          {
+  98   1        // set the PHY register address
+  99   1        enc28j60Write(MIREGADR, address);
+ 100   1        // write the PHY data
+ 101   1        enc28j60Write(MIWRL, mydat & 0x00ff);
+ 102   1        enc28j60Write(MIWRH, mydat >> 8);
+ 103   1        // wait until the PHY write completes
+ 104   1        while(enc28j60Read(MISTAT) & MISTAT_BUSY)
+ 105   1        {
+ 106   2          delay_us(15);
+ 107   2        }
+ 108   1      }
+ 109          
+ 110          void enc28j60ReadBuffer(u16_t len, u8_t* dat)
+ 111          {
+ 112   1      
+ 113   1        //CSN = 0;
+ 114   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),~(1 << 6));
+ 115   1        WriteByte(ENC28J60_READ_BUF_MEM);
+ 116   1        while(len--)
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 3   
+
+ 117   1        {
+ 118   2          *dat++ = ReadByte();
+ 119   2        } 
+ 120   1        //CSN = 1;
+ 121   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),0xff);
+ 122   1      }
+ 123          
+ 124          void enc28j60WriteBuffer(u16_t len, u8_t* dat)
+ 125          {
+ 126   1        //CSN = 0;
+ 127   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),~(1 << 6));
+ 128   1        WriteByte(ENC28J60_WRITE_BUF_MEM);
+ 129   1        while(len--)
+ 130   1        {
+ 131   2          WriteByte(*dat++);
+ 132   2        } 
+ 133   1        //CSN = 1;
+ 134   1      PCF8574_Single_WriteI2C((UA_PCF8574_SlaveAddress ),0xff);
+ 135   1      
+ 136   1      }
+ 137          
+ 138          #define ETHERNET_MIN_PACKET_LENGTH  0x3C
+ 139          #define ETHERNET_HEADER_LENGTH    0x0E
+ 140          
+ 141          #define IP_TCP_HEADER_LENGTH 40
+ 142          #define TOTAL_HEADER_LENGTH (IP_TCP_HEADER_LENGTH+ETHERNET_HEADER_LENGTH)
+ 143          
+ 144          void enc28j60PacketSend(u16_t len, u8_t* packet)
+ 145          {
+ 146   1        // Set the write pointer to start of transmit buffer area
+ 147   1        enc28j60Write(EWRPTL, TXSTART_INIT);
+ 148   1        enc28j60Write(EWRPTH, TXSTART_INIT>>8);
+ 149   1      
+ 150   1        // Set the TXND pointer to correspond to the packet size given
+ 151   1        enc28j60Write(ETXNDL, (TXSTART_INIT+len));
+ 152   1        enc28j60Write(ETXNDH, (TXSTART_INIT+len)>>8);
+ 153   1      
+ 154   1        // write per-packet control byte
+ 155   1        enc28j60WriteOp(ENC28J60_WRITE_BUF_MEM, 0, 0x00);
+ 156   1      
+ 157   1        // TODO, fix this up
+ 158   1      
+ 159   1        if( uip_len <= TOTAL_HEADER_LENGTH )
+ 160   1        {
+ 161   2          // copy the packet into the transmit buffer
+ 162   2          enc28j60WriteBuffer(len, packet);
+ 163   2        }
+ 164   1        else
+ 165   1        {
+ 166   2          len -= TOTAL_HEADER_LENGTH;
+ 167   2          enc28j60WriteBuffer(TOTAL_HEADER_LENGTH, packet);
+ 168   2          enc28j60WriteBuffer(len, (unsigned char *)uip_appdata);
+ 169   2        }
+ 170   1        // send the contents of the transmit buffer onto the network
+ 171   1        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRTS);
+ 172   1      }
+ 173          
+ 174          
+ 175          
+ 176          
+ 177          u16_t enc28j60PacketReceive(u16_t maxlen, u8_t* packet)
+ 178          {
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 4   
+
+ 179   1        u16_t rxstat;
+ 180   1        u16_t len;
+ 181   1        u16_t rs,re;
+ 182   1      
+ 183   1        // check if a packet has been received and buffered
+ 184   1        if( !(enc28j60Read(EIR) & EIR_PKTIF) )
+ 185   1        {
+ 186   2          // Errata workaround #6, PKTIF is not reliable
+ 187   2          // double check by looking at EPKTCNT
+ 188   2          if (enc28j60Read(EPKTCNT) == 0)
+ 189   2            return 0;
+ 190   2        }
+ 191   1      
+ 192   1        // Set the read pointer to the start of the received packet
+ 193   1        enc28j60Write(ERDPTL, (NextPacketPtr));
+ 194   1        enc28j60Write(ERDPTH, (NextPacketPtr)>>8);
+ 195   1      
+ 196   1        // read the next packet pointer
+ 197   1        NextPacketPtr  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+ 198   1        NextPacketPtr |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+ 199   1      
+ 200   1        // read the packet length
+ 201   1        len  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+ 202   1        len |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+ 203   1      
+ 204   1        // read the receive status
+ 205   1        rxstat  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+ 206   1        rxstat |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+ 207   1      
+ 208   1        // limit retrieve length
+ 209   1        // (we reduce the MAC-reported length by 4 to remove the CRC)
+ 210   1        len = MIN(len, maxlen);
+ 211   1      
+ 212   1        // copy the packet from the receive buffer
+ 213   1        enc28j60ReadBuffer(len, packet);
+ 214   1        rs = enc28j60Read(ERXSTH);
+ 215   1        rs <<= 8;
+ 216   1        rs |= enc28j60Read(ERXSTL);
+ 217   1        re = enc28j60Read(ERXNDH);
+ 218   1        re <<= 8;
+ 219   1        re |= enc28j60Read(ERXNDL);
+ 220   1        if (NextPacketPtr - 1 < rs || NextPacketPtr - 1 > re)
+ 221   1        {
+ 222   2          enc28j60Write(ERXRDPTL, (re));
+ 223   2          enc28j60Write(ERXRDPTH, (re)>>8);
+ 224   2        }
+ 225   1        else
+ 226   1        {
+ 227   2          enc28j60Write(ERXRDPTL, (NextPacketPtr-1));
+ 228   2          enc28j60Write(ERXRDPTH, (NextPacketPtr-1)>>8);
+ 229   2        }
+ 230   1      
+ 231   1        // decrement the packet counter indicate we are done with this packet
+ 232   1        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON2, ECON2_PKTDEC);
+ 233   1      
+ 234   1        return len;
+ 235   1      }
+ 236          
+ 237          void dev_init(void)
+ 238          {
+ 239   1        enc28j60_init();
+ 240   1      }
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 5   
+
+ 241          
+ 242          void dev_send(void)
+ 243          {
+ 244   1        enc28j60PacketSend(uip_len, uip_buf);
+ 245   1      }
+ 246          
+ 247          u16_t dev_poll(void)
+ 248          {
+ 249   1        return enc28j60PacketReceive(UIP_BUFSIZE, uip_buf);
+ 250   1      }
+ 251          
+ 252          void enc28j60_init(void)
+ 253          {
+ 254   1        // perform system reset
+ 255   1        enc28j60WriteOp(ENC28J60_SOFT_RESET, 0, ENC28J60_SOFT_RESET);
+ 256   1        delay_ms(5);
+ 257   1      
+ 258   1        // set receive buffer start address
+ 259   1        NextPacketPtr = RXSTART_INIT;
+ 260   1        enc28j60Write(ERXSTL, RXSTART_INIT&0xFF);
+ 261   1        enc28j60Write(ERXSTH, RXSTART_INIT>>8);
+ 262   1      
+ 263   1        // set receive pointer address
+ 264   1        enc28j60Write(ERXRDPTL, RXSTART_INIT&0xFF);
+ 265   1        enc28j60Write(ERXRDPTH, RXSTART_INIT>>8);
+ 266   1      
+ 267   1        // set receive buffer end
+ 268   1        // ERXND defaults to 0x1FFF (end of ram)
+ 269   1        enc28j60Write(ERXNDL, RXSTOP_INIT&0xFF);
+ 270   1        enc28j60Write(ERXNDH, RXSTOP_INIT>>8);
+ 271   1      
+ 272   1        // set transmit buffer start
+ 273   1        // ETXST defaults to 0x0000 (beginnging of ram)
+ 274   1        enc28j60Write(ETXSTL, TXSTART_INIT&0xFF);
+ 275   1        enc28j60Write(ETXSTH, TXSTART_INIT>>8);
+ 276   1      
+ 277   1        // do bank 2 stuff
+ 278   1        // enable MAC receive
+ 279   1        enc28j60Write(MACON1, MACON1_MARXEN|MACON1_TXPAUS|MACON1_RXPAUS);
+ 280   1      
+ 281   1        // bring MAC out of reset
+ 282   1        enc28j60Write(MACON2, 0x00);
+ 283   1      
+ 284   1        // enable automatic padding and CRC operations
+ 285   1        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, MACON3, MACON3_PADCFG0|MACON3_TXCRCEN|MACON3_FRMLNEN);
+ 286   1      
+ 287   1        // set inter-frame gap (non-back-to-back)
+ 288   1        enc28j60Write(MAIPGL, 0x12);
+ 289   1        enc28j60Write(MAIPGH, 0x0C);
+ 290   1        // set inter-frame gap (back-to-back)
+ 291   1        enc28j60Write(MABBIPG, 0x12);
+ 292   1        // Set the maximum packet size which the controller will accept
+ 293   1        enc28j60Write(MAMXFLL, MAX_FRAMELEN&0xFF);  
+ 294   1        enc28j60Write(MAMXFLH, MAX_FRAMELEN>>8);
+ 295   1      
+ 296   1        // do bank 3 stuff
+ 297   1        // write MAC address
+ 298   1        // NOTE: MAC address in ENC28J60 is byte-backward
+ 299   1        enc28j60Write(MAADR5, UIP_ETHADDR0);
+ 300   1        enc28j60Write(MAADR4, UIP_ETHADDR1);
+ 301   1        enc28j60Write(MAADR3, UIP_ETHADDR2);
+ 302   1        enc28j60Write(MAADR2, UIP_ETHADDR3);
+C51 COMPILER V9.54   ENC28J60                                                              10/13/2015 11:38:07 PAGE 6   
+
+ 303   1        enc28j60Write(MAADR1, UIP_ETHADDR4);
+ 304   1        enc28j60Write(MAADR0, UIP_ETHADDR5);
+ 305   1      
+ 306   1        // no loopback of transmitted frames
+ 307   1        enc28j60PhyWrite(PHCON2, PHCON2_HDLDIS);
+ 308   1      
+ 309   1        // switch to bank 0
+ 310   1        enc28j60SetBank(ECON1);
+ 311   1      
+ 312   1        // enable interrutps
+ 313   1        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, EIE, EIE_INTIE|EIE_PKTIE);
+ 314   1      
+ 315   1        // enable packet reception
+ 316   1        enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_RXEN);
+ 317   1      }
+ 318          
+ 319          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1268    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      42
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =      3       2
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

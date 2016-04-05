@@ -1,0 +1,11 @@
+.\rvmdk-cm4f\eeprom.o: eeprom.c
+.\rvmdk-cm4f\eeprom.o: ..\inc/hw_eeprom.h
+.\rvmdk-cm4f\eeprom.o: ..\inc/hw_flash.h
+.\rvmdk-cm4f\eeprom.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\eeprom.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\eeprom.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\eeprom.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\eeprom.o: ..\driverlib/flash.h
+.\rvmdk-cm4f\eeprom.o: ..\driverlib/interrupt.h
+.\rvmdk-cm4f\eeprom.o: ..\driverlib/sysctl.h
+.\rvmdk-cm4f\eeprom.o: ..\driverlib/eeprom.h

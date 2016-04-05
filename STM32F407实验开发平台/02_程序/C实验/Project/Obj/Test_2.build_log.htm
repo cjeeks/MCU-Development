@@ -1,0 +1,301 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.14.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: sdf sdf, sfg, LIC=HN0WF-6H3JM-ADHKK-ZW29D-KYDSX-V3VUI
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Standard  Version: 5.14.0.0
+Toolchain Path:  E:\Program Files (x86)\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.13.0
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+H:\SHARE\垃圾文件\光盘\整理的光盘20151025\STM32F407实验开发平台\02_程序\C实验\综合测试\Project\Test.uvprojx
+Project File Date:  10/25/2015
+
+<h2>Output:</h2>
+Build target 'Test'
+compiling system_stm32f4xx.c...
+assembling startup_stm32f4xx.s...
+compiling main.c...
+..\User\main.c(2): warning:  #9-D: nested comment is not allowed
+  /**-------------------------------------------------------------------------------------------
+..\BaseDrive\uart.h(34): warning:  #1295-D: Deprecated declaration Send_Com - give arg types
+  void Send_Com();
+..\ExternalDrive\BMP085\BMP085.h(26): warning:  #1295-D: Deprecated declaration I2C_Start - give arg types
+  void I2C_Start();
+..\ExternalDrive\BMP085\BMP085.h(27): warning:  #1295-D: Deprecated declaration I2C_Stop - give arg types
+  void I2C_Stop();
+..\ExternalDrive\BMP085\BMP085.h(29): warning:  #1295-D: Deprecated declaration I2C_RecvACK - give arg types
+  char I2C_RecvACK();
+..\ExternalDrive\BMP085\BMP085.h(37): warning:  #1295-D: Deprecated declaration bmp085Convert - give arg types
+  void bmp085Convert();
+..\ExternalDrive\BMP085\BMP085.h(40): warning:  #1295-D: Deprecated declaration DATA_Diplay - give arg types
+  void DATA_Diplay();
+..\User\main.c(99): warning:  #177-D: variable "j" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(99): warning:  #177-D: variable "i" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(99): warning:  #177-D: variable "t" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(100): warning:  #177-D: variable "temp" was declared but never referenced
+        unsigned long temp;
+..\User\main.c(162): warning:  #188-D: enumerated type mixed with another type
+                RELAY1_ONOFF(SET);
+..\User\main.c(163): warning:  #188-D: enumerated type mixed with another type
+                RELAY2_ONOFF(SET);
+..\User\main.c(164): warning:  #188-D: enumerated type mixed with another type
+                RELAY3_ONOFF(SET);
+..\User\main.c(167): warning:  #188-D: enumerated type mixed with another type
+                RELAY1_ONOFF(RESET);
+..\User\main.c(169): warning:  #188-D: enumerated type mixed with another type
+                RELAY2_ONOFF(RESET);
+..\User\main.c(171): warning:  #188-D: enumerated type mixed with another type
+                RELAY3_ONOFF(RESET);
+..\User\main.c(173): warning:  #188-D: enumerated type mixed with another type
+                RELAY1_ONOFF(SET);
+..\User\main.c(174): warning:  #188-D: enumerated type mixed with another type
+                RELAY2_ONOFF(SET);
+..\User\main.c(175): warning:  #188-D: enumerated type mixed with another type
+                RELAY3_ONOFF(SET);
+..\User\main.c(160): warning:  #177-D: variable "j" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(160): warning:  #177-D: variable "i" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(160): warning:  #177-D: variable "t" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(189): warning:  #188-D: enumerated type mixed with another type
+                LED1_ONOFF(SET);
+..\User\main.c(190): warning:  #188-D: enumerated type mixed with another type
+                LED2_ONOFF(SET);
+..\User\main.c(191): warning:  #188-D: enumerated type mixed with another type
+                LED3_ONOFF(SET);
+..\User\main.c(192): warning:  #188-D: enumerated type mixed with another type
+                LED4_ONOFF(SET);
+..\User\main.c(194): warning:  #188-D: enumerated type mixed with another type
+                LED1_ONOFF(RESET);
+..\User\main.c(196): warning:  #188-D: enumerated type mixed with another type
+                LED2_ONOFF(RESET);
+..\User\main.c(198): warning:  #188-D: enumerated type mixed with another type
+                LED3_ONOFF(RESET);
+..\User\main.c(200): warning:  #188-D: enumerated type mixed with another type
+                LED4_ONOFF(RESET);
+..\User\main.c(202): warning:  #188-D: enumerated type mixed with another type
+                LED1_ONOFF(SET);
+..\User\main.c(203): warning:  #188-D: enumerated type mixed with another type
+                LED2_ONOFF(SET);
+..\User\main.c(204): warning:  #188-D: enumerated type mixed with another type
+                LED3_ONOFF(SET);
+..\User\main.c(205): warning:  #188-D: enumerated type mixed with another type
+                LED4_ONOFF(SET);
+..\User\main.c(187): warning:  #177-D: variable "j" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(187): warning:  #177-D: variable "i" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(187): warning:  #177-D: variable "t" was declared but never referenced
+  {     u8 j,i,t;
+..\User\main.c(221): warning:  #177-D: variable "tempcount" was declared but never referenced
+        u8 tempcount=0;
+..\User\main.c(474): warning:  #188-D: enumerated type mixed with another type
+                GPIO_WriteBit(GPIOC,GPIO_Pin_13,SET);   
+..\User\main.c(480): warning:  #188-D: enumerated type mixed with another type
+                GPIO_WriteBit(GPIOC,GPIO_Pin_13,RESET);
+..\User\main.c(455): warning:  #177-D: variable "j" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(455): warning:  #177-D: variable "i" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(455): warning:  #177-D: variable "t" was declared but never referenced
+  {  u8 j,i,t;
+..\User\main.c(456): warning:  #177-D: variable "keytemp" was declared but never referenced
+         u8 keytemp;
+..\User\main.c(457): warning:  #177-D: variable "motor_number" was declared but never referenced
+         u8 motor_number;
+..\User\main.c(458): warning:  #177-D: variable "motor_n" was declared but never referenced
+         u8 motor_n[3];
+..\User\main.c(551): warning:  #223-D: function "LCD_DrawRectangle" declared implicitly
+        LCD_DrawRectangle(0,0, 479, 271, Green);
+..\User\main.c(568): warning:  #188-D: enumerated type mixed with another type
+                        LED1_ONOFF(RESET);
+..\User\main.c(574): warning:  #188-D: enumerated type mixed with another type
+                        LED2_ONOFF(RESET);
+..\User\main.c(575): warning:  #223-D: function "USART1_Send" declared implicitly
+                                                        USART1_Send("AT\r\n",4);
+..\User\main.c(581): warning:  #188-D: enumerated type mixed with another type
+                        LED3_ONOFF(RESET);
+..\User\main.c(587): warning:  #188-D: enumerated type mixed with another type
+                        LED4_ONOFF(RESET);
+..\User\main.c(593): warning:  #188-D: enumerated type mixed with another type
+                        LED4_ONOFF(SET);
+..\User\main.c(599): warning:  #188-D: enumerated type mixed with another type
+        LED1_ONOFF(SET);
+..\User\main.c(600): warning:  #188-D: enumerated type mixed with another type
+        LED2_ONOFF(SET);
+..\User\main.c(601): warning:  #188-D: enumerated type mixed with another type
+        LED3_ONOFF(SET);
+..\User\main.c(602): warning:  #188-D: enumerated type mixed with another type
+        LED4_ONOFF(SET);
+..\User\main.c(625): warning:  #223-D: function "DTH11_RH" declared implicitly
+                DTH11_RH();
+..\User\main.c(626): warning:  #223-D: function "Send_DTH11" declared implicitly
+                Send_DTH11();
+..\User\main.c(770): warning:  #223-D: function "ABCD_port" declared implicitly
+        ABCD_port(shift);//ABCD_port = (ABCD_port & 0x0f)|(han<<4);  //HC138译码输出
+..\User\main.c(521): warning:  #177-D: variable "tempf" was declared but never referenced
+        u8 keyDat,tempf;
+..\User\main.c: 62 warnings, 0 errors
+compiling stm32f4xx_it.c...
+..\BaseDrive\Uart.h(34): warning:  #1295-D: Deprecated declaration Send_Com - give arg types
+  void Send_Com();
+..\User\stm32f4xx_it.c(160): warning:  #223-D: function "USART3_IRQ" declared implicitly
+      USART3_IRQ();     
+..\User\stm32f4xx_it.c(165): warning:  #223-D: function "USART2_IRQ" declared implicitly
+      USART2_IRQ();     
+..\User\stm32f4xx_it.c(170): warning:  #223-D: function "USART1_IRQ" declared implicitly
+      USART1_IRQ();     
+..\User\stm32f4xx_it.c(181): warning:  #223-D: function "USART6_IRQ" declared implicitly
+      USART6_IRQ();     
+..\User\stm32f4xx_it.c: 5 warnings, 0 errors
+compiling misc.c...
+compiling stm32f4xx_adc.c...
+compiling stm32f4xx_can.c...
+compiling stm32f4xx_crc.c...
+compiling stm32f4xx_cryp.c...
+compiling stm32f4xx_cryp_aes.c...
+compiling stm32f4xx_cryp_des.c...
+compiling stm32f4xx_cryp_tdes.c...
+compiling stm32f4xx_dac.c...
+compiling stm32f4xx_dbgmcu.c...
+compiling stm32f4xx_dcmi.c...
+compiling stm32f4xx_dma.c...
+compiling stm32f4xx_exti.c...
+compiling stm32f4xx_flash.c...
+compiling stm32f4xx_fsmc.c...
+compiling stm32f4xx_gpio.c...
+compiling stm32f4xx_hash.c...
+compiling stm32f4xx_hash_md5.c...
+compiling stm32f4xx_hash_sha1.c...
+compiling stm32f4xx_i2c.c...
+compiling stm32f4xx_iwdg.c...
+compiling stm32f4xx_pwr.c...
+compiling stm32f4xx_rcc.c...
+compiling stm32f4xx_rng.c...
+compiling stm32f4xx_rtc.c...
+compiling stm32f4xx_sdio.c...
+compiling stm32f4xx_spi.c...
+compiling stm32f4xx_syscfg.c...
+compiling stm32f4xx_tim.c...
+compiling stm32f4xx_usart.c...
+compiling stm32f4xx_wwdg.c...
+compiling Gpio.c...
+compiling SysTick.c...
+compiling Uart.c...
+..\BaseDrive\uart.h(34): warning:  #1295-D: Deprecated declaration Send_Com - give arg types
+  void Send_Com();
+..\BaseDrive\Uart.c(277): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
+                LCD_ShowString(114, 180, Rfid_Id, Red, Black);
+..\BaseDrive\Uart.c(282): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "u8 *"
+                LCD_ShowString(138, 200, Rfid_Value, Red, Black);
+..\BaseDrive\Uart.c: 3 warnings, 0 errors
+compiling lcd.c...
+..\ExternalDrive\lcd\lcd.c(553): warning:  #9-D: nested comment is not allowed
+        High8bit=*c;             /*  高8位数据  */
+..\ExternalDrive\lcd\lcd.c(563): warning:  #550-D: variable "c4" was set but never used
+            unsigned char *c4;
+..\ExternalDrive\lcd\lcd.c(757): warning:  #223-D: function "abs" declared implicitly
+                if(abs(yend-ysta)>abs(xend-xsta))/*斜率大于1 */ 
+..\ExternalDrive\lcd\lcd.c(79): warning:  #177-D: function "lcd_data_bus_test" was declared but never referenced
+  static void lcd_data_bus_test(void)
+..\ExternalDrive\lcd\lcd.c: 4 warnings, 0 errors
+compiling tm1638.c...
+..\ExternalDrive\TM1638\tm1638.c(115): warning:  #223-D: function "Delay" declared implicitly
+        Delay(1);
+..\ExternalDrive\TM1638\tm1638.c(112): warning:  #177-D: variable "key" was declared but never referenced
+        int* key;
+..\ExternalDrive\TM1638\tm1638.c(17): warning:  #177-D: function "Delay_1us" was declared but never referenced
+  static Delay_1us(int counter)
+..\ExternalDrive\TM1638\tm1638.c: 3 warnings, 0 errors
+compiling delay.c...
+compiling BMP085.C...
+..\ExternalDrive\BMP085\BMP085.h(26): warning:  #1295-D: Deprecated declaration I2C_Start - give arg types
+  void I2C_Start();
+..\ExternalDrive\BMP085\BMP085.h(27): warning:  #1295-D: Deprecated declaration I2C_Stop - give arg types
+  void I2C_Stop();
+..\ExternalDrive\BMP085\BMP085.h(29): warning:  #1295-D: Deprecated declaration I2C_RecvACK - give arg types
+  char I2C_RecvACK();
+..\ExternalDrive\BMP085\BMP085.h(37): warning:  #1295-D: Deprecated declaration bmp085Convert - give arg types
+  void bmp085Convert();
+..\ExternalDrive\BMP085\BMP085.h(40): warning:  #1295-D: Deprecated declaration DATA_Diplay - give arg types
+  void DATA_Diplay();
+..\ExternalDrive\BMP085\BMP085.C(27): warning:  #1295-D: Deprecated declaration I2C_Stop - give arg types
+  void I2C_Stop();
+..\ExternalDrive\BMP085\BMP085.C(397): warning:  #223-D: function "printf" declared implicitly
+        printf("temperature=%c%c.%c\n",outdata[3],outdata[4],outdata[5]);
+..\ExternalDrive\BMP085\BMP085.C(411): warning:  #1-D: last line of file ends without a newline
+  }
+..\ExternalDrive\BMP085\BMP085.C: 8 warnings, 0 errors
+compiling DTH11.c...
+..\BaseDrive\uart.h(34): warning:  #1295-D: Deprecated declaration Send_Com - give arg types
+  void Send_Com();
+..\ExternalDrive\DTH11\DTH11.c(66): warning:  #177-D: variable "count" was declared but never referenced
+              unsigned char count,i;
+..\ExternalDrive\DTH11\DTH11.c(231): warning:  #223-D: function "printf" declared implicitly
+                printf("humi_value =%d %%RH \r\n",str[0]);
+..\ExternalDrive\DTH11\DTH11.c: 3 warnings, 0 errors
+compiling MMA7455.c...
+..\ExternalDrive\BMP085\BMP085.h(26): warning:  #1295-D: Deprecated declaration I2C_Start - give arg types
+  void I2C_Start();
+..\ExternalDrive\BMP085\BMP085.h(27): warning:  #1295-D: Deprecated declaration I2C_Stop - give arg types
+  void I2C_Stop();
+..\ExternalDrive\BMP085\BMP085.h(29): warning:  #1295-D: Deprecated declaration I2C_RecvACK - give arg types
+  char I2C_RecvACK();
+..\ExternalDrive\BMP085\BMP085.h(37): warning:  #1295-D: Deprecated declaration bmp085Convert - give arg types
+  void bmp085Convert();
+..\ExternalDrive\BMP085\BMP085.h(40): warning:  #1295-D: Deprecated declaration DATA_Diplay - give arg types
+  void DATA_Diplay();
+..\ExternalDrive\MMA7455\MMA7455.c(54): warning:  #223-D: function "printf" declared implicitly
+                printf("No acceleration!");
+..\ExternalDrive\MMA7455\MMA7455.c(38): warning:  #177-D: variable "j" was declared but never referenced
+        uchar j;                                                                                                                           //                    “No acceleration!"
+..\ExternalDrive\MMA7455\MMA7455.c(39): warning:  #550-D: variable "status" was set but never used
+        char t, status, name;
+..\ExternalDrive\MMA7455\MMA7455.c(39): warning:  #550-D: variable "name" was set but never used
+        char t, status, name;
+..\ExternalDrive\MMA7455\MMA7455.c(79): warning:  #223-D: function "printf" declared implicitly
+        printf("X_angle %c%c%c ", X_Angle[2], X_Angle[3], X_Angle[4]);  
+..\ExternalDrive\MMA7455\MMA7455.c(67): warning:  #177-D: variable "x1" was declared but never referenced
+        u16 x1,x2,x3,xsign;
+..\ExternalDrive\MMA7455\MMA7455.c(67): warning:  #177-D: variable "x2" was declared but never referenced
+        u16 x1,x2,x3,xsign;
+..\ExternalDrive\MMA7455\MMA7455.c(67): warning:  #177-D: variable "x3" was declared but never referenced
+        u16 x1,x2,x3,xsign;
+..\ExternalDrive\MMA7455\MMA7455.c(67): warning:  #177-D: variable "xsign" was declared but never referenced
+        u16 x1,x2,x3,xsign;
+..\ExternalDrive\MMA7455\MMA7455.c(68): warning:  #177-D: variable "x_data" was declared but never referenced
+        uchar x_data[4], status;
+..\ExternalDrive\MMA7455\MMA7455.c(68): warning:  #177-D: variable "status" was declared but never referenced
+        uchar x_data[4], status;
+..\ExternalDrive\MMA7455\MMA7455.c: 16 warnings, 0 errors
+linking...
+Program Size: Code=13634 RO-data=426242 RW-data=484 ZI-data=1084  
+FromELF: creating hex file...
+".\Obj\Test_2.axf" - 0 Error(s), 104 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  H:\SHARE\垃圾文件\光盘\整理的光盘20151025\STM32F407实验开发平台\02_程序\C实验\综合测试\Project\RTE
+  E:\Program Files (x86)\ARM\PACK\Keil\STM32F4xx_DFP\2.6.0
+
+<h2>Collection of Component Files used:</h2>
+</pre>
+</body>
+</html>

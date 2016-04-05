@@ -1,0 +1,184 @@
+C51 COMPILER V9.54   MMA7455                                                               10/13/2015 11:38:07 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MMA7455
+OBJECT MODULE PLACED IN MMA7455.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE MMA7455\MMA7455.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRI
+                    -NT(.\MMA7455.lst) TABS(2) OBJECT(MMA7455.obj)
+
+line level    source
+
+   1          #include "MMA7455.h"
+   2          
+   3          //    MMA7455
+   4          uchar table4[10]="0123456789";
+   5          
+   6          uchar xposivalue;     //x?y¡¤??¨°?¨²????¨º?g?¦Ì
+   7          uchar xnegavalue;     //x¡¤¡ä¡¤??¨°?¨²????¨º?g?¦Ì
+   8          uchar yposivalue;     //y?y¡¤??¨°?¨²????¨º?g?¦Ì
+   9          uchar ynegavalue;     //y¡¤¡ä¡¤??¨°?¨²????¨º?g?¦Ì
+  10          
+  11          /**************************************************************************/
+  12          /************                  ¸÷ÑÓÊ±³ÌÐò                    **************/
+  13          /**************************************************************************/
+  14          
+  15          void delay5ms()
+  16          { 
+  17   1        idata int i; 
+  18   1      
+  19   1        i=500;
+  20   1        while(i--);
+  21   1        
+  22   1      }
+  23          
+  24          
+  25          void MMA7455_delay50us(void)
+  26          {
+  27   1          
+  28   1         int i=500;  
+  29   1         while(i) 
+  30   1         { 
+  31   2           i--; 
+  32   2         }  
+  33   1      }
+  34          
+  35          //*****************************************************************************************************
+  36          //?¨°I2C¨¦¨¨¡À?D¡ä¨¨?¨°???¡Á??¨²¨ºy?Y
+  37          //*****************************************************************************************************
+  38          void Single_WriteI2C(uchar SlaveAddress, uchar REG_Address,uchar REG_data)
+  39          {
+  40   1          I2C_Start();                  //?e¨º?D?o?
+  41   1          I2C_WriteAbyte(SlaveAddress);   //¡¤¡é?¨ª¨¦¨¨¡À?¦Ì??¡¤+D¡äD?o?
+  42   1          I2C_WriteAbyte(REG_Address);    //?¨²2???¡ä??¡Â¦Ì??¡¤¡ê?
+  43   1          I2C_WriteAbyte(REG_data);       //?¨²2???¡ä??¡Â¨ºy?Y¡ê?
+  44   1          I2C_Stop();                   //¡¤¡é?¨ª¨ª¡ê?1D?o?
+  45   1      }
+  46          //*******************************************************************************************************
+  47          //¡ä¨®I2C¨¦¨¨¡À??¨¢¨¨?¨°???¡Á??¨²¨ºy?Y
+  48          //*******************************************************************************************************
+  49          uchar Single_ReadI2C(uchar SlaveAddress, uchar REG_Address)
+  50          {
+  51   1        uchar REG_data;
+  52   1        I2C_Start();                   //?e¨º?D?o?
+  53   1        I2C_WriteAbyte(SlaveAddress - 1);    //¡¤¡é?¨ª¨¦¨¨¡À?¦Ì??¡¤+D¡äD?o?
+  54   1        I2C_WriteAbyte(REG_Address);     //¡¤¡é?¨ª¡ä?¡ä¡é¦Ì£¤?a¦Ì??¡¤¡ê?¡ä¨®0?a¨º?  
+C51 COMPILER V9.54   MMA7455                                                               10/13/2015 11:38:07 PAGE 2   
+
+  55   1        I2C_Start();                   //?e¨º?D?o?
+  56   1        I2C_WriteAbyte(SlaveAddress);  //¡¤¡é?¨ª¨¦¨¨¡À?¦Ì??¡¤+?¨¢D?o?
+  57   1        REG_data=I2C_ReadAbyte();       //?¨¢3???¡ä??¡Â¨ºy?Y
+  58   1        //I2C_SendACK(1);                //?¨®¨º?¨®|¡äeD?o?
+  59   1          S_NoACK();
+  60   1        I2C_Stop();                    //¨ª¡ê?1D?o?
+  61   1        return REG_data;
+  62   1      } 
+  63          
+  64          //******************************************************************************************************
+  65          //3?¨º??¡¥MMA7455
+  66          //******************************************************************************************************
+  67          void MMA7455_data_init(void)
+  68          {
+  69   1        xposivalue=50;
+  70   1        xnegavalue=50;
+  71   1        yposivalue=50;
+  72   1        ynegavalue=50;
+  73   1      }
+  74          
+  75          u8 MMA7455_self_test(void)           //o¡¥¨ºy1|?¨¹¡êo?¨¬2a7455¨®D??¨®D2?o?
+  76          {                                          //          ¨¨?1???¨®D2?o?¡ê?1602???¨¢??¨º?
+  77   1        uchar j;                                 //      ?¡ãNo acceleration!"
+  78   1        char t, status, name;
+  79   1      
+  80   1        MMA7455_delay50us();
+  81   1          Single_WriteI2C(MMA7455_IIC_WRITE, 0x16,0x15);
+  82   1        status = Single_ReadI2C(MMA7455_IIC_READ, 0x09);
+  83   1        name = Single_ReadI2C(MMA7455_IIC_READ, 0x0f); //whoami
+  84   1        MMA7455_delay50us();
+  85   1        t = Single_ReadI2C(MMA7455_IIC_READ, 0x16);
+  86   1      
+  87   1        Single_WriteI2C(MMA7455_IIC_WRITE, 0x10,0x15);
+  88   1        Single_WriteI2C(MMA7455_IIC_WRITE, 0x12,0x25);  
+  89   1        Single_WriteI2C(MMA7455_IIC_WRITE, 0x14,0x10);  
+  90   1        
+  91   1        if(t!=0x15)
+  92   1        {
+  93   2          //printf("No acceleration!"); 
+  94   2          //LCD_ShowString(150, 30, "Not found!");
+  95   2          return 0;
+  96   2        }
+  97   1        else
+  98   1        {
+  99   2          //LCD_ShowString(150, 30, "found!");
+ 100   2          //printf("X= 0.00,Y= 0.00, Z= 0.00,t=%c\n",t);
+ 101   2          return 1;
+ 102   2        }
+ 103   1      }
+*** WARNING C280 IN LINE 77 OF MMA7455\MMA7455.c: 'j': unreferenced local variable
+ 104          
+ 105          
+ 106          
+ 107          
+ 108          ////////////////////////////////////////////////////////////////////////////////////////
+ 109          void MMA7455_sendxyz(void)        
+ 110          {
+ 111   1        u16 x1,x2,x3,xsign;
+ 112   1        uchar x_data[4], status;
+ 113   1        u16 x,y,z;
+ 114   1        u8 X_Angle[] = {"X:000"}, Y_Angle[] = {"Y:000"}, Z_Angle[] = {"Z:000"}; 
+ 115   1      
+C51 COMPILER V9.54   MMA7455                                                               10/13/2015 11:38:07 PAGE 3   
+
+ 116   1        x =Single_ReadI2C(MMA7455_IIC_READ, 0x06);
+ 117   1        y =Single_ReadI2C(MMA7455_IIC_READ, 0x07);
+ 118   1        z =Single_ReadI2C(MMA7455_IIC_READ, 0x08);
+ 119   1      
+ 120   1        X_Angle[2]=(x/63)+'0';
+ 121   1        X_Angle[3]=((x*100/63)%100)/10+'0';
+ 122   1        X_Angle[4]=(x*100/63)%10+'0';   
+ 123   1        //printf("X_angle %c%c%c ", X_Angle[2], X_Angle[3], X_Angle[4]);  
+ 124   1        LCD_ShowString(150, 190,X_Angle);   
+ 125   1      
+ 126   1        Y_Angle[2]=(y/63)+'0';
+ 127   1        Y_Angle[3]=((y*100/63)%100)/10+'0';
+ 128   1        Y_Angle[4]=(y*100/63)%10+'0';   
+ 129   1        //printf("Y_angle %c%c%c ", Y_Angle[2], Y_Angle[3], Y_Angle[4]);
+ 130   1        LCD_ShowString(200, 190,Y_Angle); 
+ 131   1        
+ 132   1        Z_Angle[2] = (z/63)+'0';
+ 133   1        Z_Angle[3] = ((z*100/63)%100)/10+'0';
+ 134   1        Z_Angle[4] =( z*100/63)%10+'0';     
+ 135   1        //printf("Z_angle %c%c%c\n", Z_Angle[2], Z_Angle[2], Z_Angle[2]);
+ 136   1        LCD_ShowString(250, 190,Z_Angle); 
+ 137   1      }
+*** WARNING C280 IN LINE 111 OF MMA7455\MMA7455.c: 'x1': unreferenced local variable
+*** WARNING C280 IN LINE 111 OF MMA7455\MMA7455.c: 'x2': unreferenced local variable
+*** WARNING C280 IN LINE 111 OF MMA7455\MMA7455.c: 'x3': unreferenced local variable
+*** WARNING C280 IN LINE 111 OF MMA7455\MMA7455.c: 'xsign': unreferenced local variable
+*** WARNING C280 IN LINE 112 OF MMA7455\MMA7455.c: 'x_data': unreferenced local variable
+*** WARNING C280 IN LINE 112 OF MMA7455\MMA7455.c: 'status': unreferenced local variable
+ 138          
+ 139          
+ 140          
+ 141          void MMA7455_Test(void)
+ 142          {
+ 143   1        //MMA7455_self_test7455();  
+ 144   1        if(MMA7455_self_test()) 
+ 145   1        {         
+ 146   2          MMA7455_sendxyz();
+ 147   2          delay5ms(); 
+ 148   2        }
+ 149   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    671    ----
+   CONSTANT SIZE    =     18    ----
+   XDATA SIZE       =     14      47
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----       2
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  7 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,348 @@
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN UART.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE UART\UART.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\U
+                    -ART.lst) TABS(2) OBJECT(UART.obj)
+
+line level    source
+
+   1          #define MAIN_Fosc   22118400UL  //
+   2          #include <UART\UART.h>
+   3          #include "lcd/lcd.h"
+   4          
+   5          typedef unsigned char BYTE;
+   6          typedef unsigned int WORD;
+   7          
+   8          
+   9          
+  10          #define FOSC 22118400L      //System frequency
+  11          //set uart baud
+  12          unsigned char BAUD1 = UART_RATE1152;
+  13          #define       BAUD2 9600           //UART baudrate
+  14          /*Define UART parity mode*/
+  15          #define NONE_PARITY     0   //None parity
+  16          #define ODD_PARITY      1   //Odd parity
+  17          #define EVEN_PARITY     2   //Even parity
+  18          #define MARK_PARITY     3   //Mark parity
+  19          #define SPACE_PARITY    4   //Space parity
+  20          
+  21          #define PARITYBIT NONE_PARITY   //Testing even parity
+  22          //bit busy;
+  23          bit busy1;
+  24          bit busy2;
+  25          /*Declare SFR associated with the UART2 */
+  26          sfr AUXR  = 0x8e;           //Auxiliary register
+  27          sfr S2CON = 0x9a;           //UART2 control register
+  28          sfr S2BUF = 0x9b;           //UART2 data buffer
+  29          sfr BRT   = 0x9c;           //Baudrate generator
+  30          sfr IE2   = 0xaf;           //Interrupt control 2
+  31          
+  32          #define S2RI  0x01          //S2CON.0
+  33          #define S2TI  0x02          //S2CON.1
+  34          #define S2RB8 0x04          //S2CON.2
+  35          #define S2TB8 0x08          //S2CON.3
+  36          #define SETBIT(u8Val, u8Offset)       u8Val |= 1 << u8Offset
+  37          #define RESETBIT(u8Val, u8Offset)   u8Val &= ~(1 << u8Offset)
+  38          
+  39          unsigned char BufferA[50];
+  40          unsigned char BufferCount = 0;
+  41          unsigned char DBufferFlag=0;
+  42          
+  43          unsigned char uart_flag = 0;
+  44          
+  45          void Uart1_SendData(unsigned char dat);
+  46          void Uart1_SendString(char *s);
+  47          void Init_Uart1();
+*** WARNING C236 IN LINE 47 OF UART\UART.c: '_Init_Uart1': different length of parameter lists
+  48          void Uart2_SendData(BYTE dat);
+  49          void Uart2_SendString(char *s);
+  50          void Init_Uart2();
+  51          
+  52          void Init_Uart1(u32 baud)
+  53          {
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 2   
+
+  54   1        ES = 0;     /*关串行口中断*/  
+  55   1      
+  56   1      #ifdef SPEEDUP      /*串口速度加倍*/
+  57   1        RESETBIT(PCON, 7);
+  58   1      #else
+                SETBIT(PCON, 7);
+              #endif
+  61   1      
+  62   1        if(baud == UART_RATE1152)
+  63   1        {
+  64   2          baud = UART_RATE576;
+  65   2          SETBIT(PCON, 7);
+  66   2        }
+  67   1      
+  68   1        TMOD &= 0x0F;
+  69   1        TMOD |= 0x20;
+  70   1        ET1 = 0;        /*中断无效*/
+  71   1        TH1 = baud;
+  72   1        TL1 = baud;
+  73   1        TR1 = 1;        /*定时器开启*/
+  74   1        SCON = 0x50;
+  75   1      
+  76   1        RI = 0;
+  77   1        
+  78   1        ES = 1;       /*串行口中断printf需要串口关闭*/         //Open master interrupt switch
+  79   1      }
+  80          
+  81          /*----------------------------
+  82          UART interrupt service routine
+  83          ----------------------------*/
+  84          void Uart1_Isr() interrupt 4 using 1    //RFID
+  85          { 
+  86   1      
+  87   1        unsigned char ch;
+  88   1          
+  89   1          if (RI)
+  90   1          { 
+  91   2            
+  92   2            uart_flag ++;  
+  93   2            
+  94   2            RI = 0;             //Clear receive interrupt flag
+  95   2            ch = SBUF;  
+  96   2            
+  97   2            BufferA[BufferCount++] = ch;
+  98   2            if(BufferCount > 48)
+  99   2            {
+ 100   3                  DBufferFlag=1;
+ 101   3              BufferCount=0;
+ 102   3              }
+ 103   2            else
+ 104   2            {
+ 105   3              DBufferFlag=0;
+ 106   3            }
+ 107   2          
+ 108   2          //PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress ,0);
+ 109   2              //P0 = SBUF;          //P0 show UART data
+ 110   2              //bit9 = RB8;         //P2.2 show parity bit
+ 111   2          }
+ 112   1       
+ 113   1          if (TI)
+ 114   1          {  
+ 115   2              TI = 0;             //Clear transmit interrupt flag
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 3   
+
+ 116   2              busy1 = 0;           //Clear transmit busy flag
+ 117   2          }
+ 118   1      }
+ 119          
+ 120          /*----------------------------
+ 121          Send a byte data to UART
+ 122          Input: dat (data to be sent)
+ 123          Output:None
+ 124          ----------------------------*/
+ 125          void Uart1_SendData(unsigned char dat)
+ 126          {
+ 127   1          while (busy1);           //Wait for the completion of the previous data is sent
+ 128   1          ACC = dat;              //Calculate the even parity bit P (PSW.0)
+ 129   1          if (P)                  //Set the parity bit according to P
+ 130   1          {
+ 131   2      #if (PARITYBIT == ODD_PARITY)
+                      TB8 = 0;            //Set parity bit to 0
+              #elif (PARITYBIT == EVEN_PARITY)
+                      TB8 = 1;            //Set parity bit to 1
+              #endif
+ 136   2          }
+ 137   1          else
+ 138   1          {
+ 139   2      #if (PARITYBIT == ODD_PARITY)
+                      TB8 = 1;            //Set parity bit to 1
+              #elif (PARITYBIT == EVEN_PARITY)
+                      TB8 = 0;            //Set parity bit to 0
+              #endif
+ 144   2          }
+ 145   1          busy1 = 1;
+ 146   1          SBUF = ACC;             //Send data to UART buffer
+ 147   1      }
+ 148          
+ 149          /*----------------------------
+ 150          Send a string to UART
+ 151          Input: s (address of string)
+ 152          Output:None
+ 153          ----------------------------*/
+ 154          void Uart1_SendString(char *s)
+ 155          {
+ 156   1          while (*s)              //Check the end of the string
+ 157   1          {
+ 158   2              Uart1_SendData(*s++);     //Send current char and increment string ptr
+ 159   2          }
+ 160   1      }
+ 161          
+ 162          void Init_Uart2()
+ 163          {
+ 164   1      #if (PARITYBIT == NONE_PARITY)
+ 165   1          S2CON = 0x50;           //8-bit variable UART
+ 166   1      #elif (PARITYBIT == ODD_PARITY) || (PARITYBIT == EVEN_PARITY) || (PARITYBIT == MARK_PARITY)
+                  S2CON = 0xda;           //9-bit variable UART, parity bit initial to 1
+              #elif (PARITYBIT == SPACE_PARITY)
+                  S2CON = 0xd2;           //9-bit variable UART, parity bit initial to 0
+              #endif
+ 171   1      
+ 172   1          BRT = -(FOSC/32/BAUD2);  //Set auto-reload vaule of baudrate generator
+ 173   1          AUXR = 0x14;            //Baudrate generator work in 1T mode
+ 174   1          IE2 = 0x01;             //Enable UART2 interrupt
+ 175   1          EA = 1;                 //Open master interrupt switch
+ 176   1      }
+ 177          
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 4   
+
+ 178          char gsm_ch[GSM_length] = {0};
+ 179          
+ 180          
+ 181          
+ 182          /*----------------------------
+ 183          UART2 interrupt service routine
+ 184          ----------------------------*/
+ 185          void Uart2() interrupt 8 using 1
+ 186          {
+ 187   1          u8 ch;
+ 188   1        
+ 189   1        static u8 gsm_count = 0;
+ 190   1        
+ 191   1          if (S2CON & S2RI)
+ 192   1          {        
+ 193   2            ch = S2BUF; 
+ 194   2            
+ 195   2            gsm_ch[gsm_count] = ch;
+ 196   2            gsm_count ++; 
+ 197   2            
+ 198   2            if(gsm_count  > GSM_length)
+ 199   2              gsm_count = 0;  
+ 200   2            
+ 201   2            _nop_();
+ 202   2            _nop_();
+ 203   2            _nop_();
+ 204   2            _nop_();
+ 205   2            _nop_();
+ 206   2            S2CON &= ~S2RI;     //Clear receive interrupt flag        
+ 207   2      
+ 208   2            //while (busy2);      
+ 209   2            
+ 210   2            /*
+ 211   2          gsm_temp[gsm_count] = ch;
+ 212   2          if(gsm_temp[gsm_count] == 0x0D)
+ 213   2          {       
+ 214   2            gsm_temp[gsm_count] = ' ';
+ 215   2            //LCD_ShowString(142, 160,a);
+ 216   2            //LCD_ShowString(150, 160,gsm_temp);
+ 217   2            gsm_count = 0;        
+ 218   2          }
+ 219   2          if(gsm_temp[gsm_count] == 0x0A)
+ 220   2            gsm_temp[gsm_count] = ' ';
+ 221   2              
+ 222   2          gsm_count ++;
+ 223   2            
+ 224   2            */
+ 225   2        
+ 226   2          }
+ 227   1          if (S2CON & S2TI)
+ 228   1          { //uart_flag = 1;
+ 229   2              S2CON &= ~S2TI;     //Clear transmit interrupt flag
+ 230   2              busy2 = 0;           //Clear transmit busy flag
+ 231   2          }
+ 232   1          
+ 233   1      }
+ 234          
+ 235          
+ 236          
+ 237          /*----------------------------
+ 238          Send a byte data to UART
+ 239          Input: dat (data to be sent)
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 5   
+
+ 240          Output:None
+ 241          ----------------------------*/
+ 242          void Uart2_SendData(unsigned char  dat)
+ 243          {
+ 244   1          while (busy2);           //Wait for the completion of the previous data is sent
+ 245   1          ACC = dat;              //Calculate the even parity bit P (PSW.0)
+ 246   1          if (P)                  //Set the parity bit according to P
+ 247   1          {
+ 248   2      #if (PARITYBIT == ODD_PARITY)
+                      S2CON &= ~S2TB8;    //Set parity bit to 0
+              #elif (PARITYBIT == EVEN_PARITY)
+                      S2CON |= S2TB8;     //Set parity bit to 1
+              #endif
+ 253   2          }
+ 254   1          else
+ 255   1          {
+ 256   2      #if (PARITYBIT == ODD_PARITY)
+                      S2CON |= S2TB8;     //Set parity bit to 1
+              #elif (PARITYBIT == EVEN_PARITY)
+                      S2CON &= ~S2TB8;    //Set parity bit to 0
+              #endif
+ 261   2          }
+ 262   1          busy2 = 1;
+ 263   1          S2BUF = ACC;            //Send data to UART2 buffer
+ 264   1      }
+ 265          
+ 266          /*----------------------------
+ 267          Send a string to UART
+ 268          Input: s (address of string)
+ 269          Output:None
+ 270          ----------------------------*/
+ 271          void Uart2_SendString(char *s)
+ 272          {
+ 273   1          while (*s)              //Check the end of the string
+ 274   1          {
+ 275   2              Uart2_SendData(*s++);     //Send current char and increment string ptr
+ 276   2          }
+ 277   1      }
+ 278          
+ 279          void Send_Com()
+ 280          {
+ 281   1      
+ 282   1        u8 i; 
+ 283   1        u8 Rfid_Id[9];
+ 284   1        idata u8 Rfid_Value[35];
+ 285   1      
+ 286   1          LCD_ShowNum(150, 80,uart_flag, 1);
+ 287   1          LCD_ShowNum(180, 80,DBufferFlag, 1);  
+ 288   1        
+ 289   1        while(BufferCount<45);
+ 290   1       
+ 291   1          for(i=0;i<9;i++)
+ 292   1            Rfid_Id[i]=BufferA[i+1];
+ 293   1          LCD_ShowString(50, 180, "RFID_ID:");
+ 294   1          LCD_ShowString(114, 180, Rfid_Id);
+ 295   1        
+ 296   1          Uart1_SendString("G1");
+ 297   1        
+ 298   1          for(i=0;i<35;i++)
+ 299   1            Rfid_Value[i]=BufferA[i+12];
+ 300   1          LCD_ShowString(50, 200, "RFID_Value:");
+ 301   1          LCD_ShowString(138, 200, Rfid_Value);
+C51 COMPILER V9.54   UART                                                                  10/13/2015 11:38:07 PAGE 6   
+
+ 302   1        for(i=0;i<BufferCount;i++)
+ 303   1            BufferA[i]=0x00;
+ 304   1             BufferCount=0;
+ 305   1             DBufferFlag=0;
+ 306   1             
+ 307   1          Uart1_SendString("G2");  
+ 308   1      }
+ 309          
+ 310          void RFID_Test(void)
+ 311          {  
+ 312   1          Send_Com(); 
+ 313   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    625    ----
+   CONSTANT SIZE    =     27    ----
+   XDATA SIZE       =     65      19
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----      35
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

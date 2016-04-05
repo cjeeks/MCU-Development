@@ -1,0 +1,264 @@
+C51 COMPILER V9.54   PCF8574T                                                              10/13/2015 11:38:07 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE PCF8574T
+OBJECT MODULE PLACED IN PCF8574T.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE PCF8574T\PCF8574T.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
+                    -RINT(.\PCF8574T.lst) TABS(2) OBJECT(PCF8574T.obj)
+
+line level    source
+
+   1          
+   2          /*---------------------------------------------------------------------*/
+   3          /* --- STC MCU International Limited ----------------------------------*/
+   4          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+   5          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+   6          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+   7          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+   8          /* --- Web: www.GXWMCU.com --------------------------------------------*/
+   9          /* --- QQ:  800003751 -------------------------------------------------*/
+  10          /* 如果要在程序中使用此代码,请在程序中注明使用了宏晶科技的资料及程序   */
+  11          /*---------------------------------------------------------------------*/
+  12          
+  13          
+  14          //编写 Coody  2005-4-12
+  15          
+  16          //#include  "config.h"
+  17          #define MAIN_Fosc   22118400UL  //
+  18          #include <PCF8574T\PCF8574T.h>
+  19          
+  20          //PCF8574T ADDRESS
+  21          //A2 A1 A0 000  0X20
+  22          //A2 A1 A0 001  0X21
+  23          //A2 A1 A0 010  0X22  LED+KEY+BUZZER
+  24          //A2 A1 A0 011  0X23
+  25          //A2 A1 A0 100  0X24
+  26          //A2 A1 A0 101  0X25
+  27          //A2 A1 A0 110  0X26
+  28          //A2 A1 A0 111  0X27
+  29          
+  30          /****************************/
+  31          void  I2C_Delay(void) //for normal MCS51, delay (2 * dly + 4) T, for STC12Cxxxx delay (4 * dly + 10) T
+  32          {
+  33   1        /*u8  dly;
+  34   1        dly = MAIN_Fosc / 2000000UL;    //按2us计算
+  35   1        //dly = MAIN_Fosc / 2000000;    //按2us计算
+  36   1        while(--dly)  ;*/
+  37   1        u16 i=80; //这里可以优化速度  ，经测试最低到5还能写入
+  38   1         while(i) 
+  39   1         { 
+  40   2           i--; 
+  41   2         } 
+  42   1       }
+  43          
+  44          /****************************/
+  45          void I2C_Start(void)               //start the I2C, SDA High-to-low when SCL is high
+  46          {
+  47   1        SDA = 1;
+  48   1        I2C_Delay();
+  49   1        SCL = 1;
+  50   1        I2C_Delay();
+  51   1        SDA = 0;
+  52   1        I2C_Delay();
+  53   1        SCL = 0;
+  54   1        I2C_Delay();
+C51 COMPILER V9.54   PCF8574T                                                              10/13/2015 11:38:07 PAGE 2   
+
+  55   1      }   
+  56          
+  57          
+  58          void I2C_Stop(void)         //STOP the I2C, SDA Low-to-high when SCL is high
+  59          {
+  60   1        SDA = 0;
+  61   1        I2C_Delay();
+  62   1        SCL = 1;
+  63   1        I2C_Delay();
+  64   1        SDA = 1;
+  65   1        I2C_Delay();
+  66   1      }
+  67          
+  68          void S_ACK(void)              //Send ACK (LOW)
+  69          {
+  70   1        SDA = 0;
+  71   1        I2C_Delay();
+  72   1        SCL = 1;
+  73   1        I2C_Delay();
+  74   1        SCL = 0;
+  75   1        I2C_Delay();
+  76   1      }
+  77          
+  78          void S_NoACK(void)           //Send No ACK (High)
+  79          {
+  80   1        SDA = 1;
+  81   1        I2C_Delay();
+  82   1        SCL = 1;
+  83   1        I2C_Delay();
+  84   1        SCL = 0;
+  85   1        I2C_Delay();
+  86   1      }
+  87              
+  88          //void I2C_Check_ACK(void)         //Check ACK, If F0=0, then right, if F0=1, then error
+  89          void I2C_Check_ACK(char ack)         //Check ACK, If F0=0, then right, if F0=1, then error
+  90          {
+  91   1      if(ack == 1)
+  92   1        SDA = 1;
+  93   1      else
+  94   1        SDA = 0;
+  95   1        I2C_Delay();
+  96   1        SCL = 1;
+  97   1        I2C_Delay();
+  98   1        F0  = SDA;
+  99   1        SCL = 0;
+ 100   1        I2C_Delay();
+ 101   1      }
+ 102          
+ 103          /****************************/
+ 104          void I2C_WriteAbyte(u8 dat)   //write a byte to I2C
+ 105          {
+ 106   1        u8 i;
+ 107   1        i = 8;
+ 108   1        do
+ 109   1        {
+ 110   2          if(dat & 0x80)  SDA = 1;
+ 111   2          else      SDA = 0;
+ 112   2          dat <<= 1;
+ 113   2          I2C_Delay();
+ 114   2          SCL = 1;
+ 115   2          I2C_Delay();
+ 116   2          SCL = 0;
+C51 COMPILER V9.54   PCF8574T                                                              10/13/2015 11:38:07 PAGE 3   
+
+ 117   2          I2C_Delay();
+ 118   2        }
+ 119   1        while(--i);
+ 120   1          I2C_Check_ACK(1);                //接收应答信号
+ 121   1      }
+ 122          
+ 123          /****************************/
+ 124          u8 I2C_ReadAbyte(void)      //read A byte from I2C
+ 125          {
+ 126   1        u8 i,dat;
+ 127   1        i = 8;
+ 128   1        SDA = 1;
+ 129   1        do
+ 130   1        {
+ 131   2          SCL = 1;
+ 132   2          I2C_Delay();
+ 133   2          dat <<= 1;
+ 134   2          if(SDA)   dat++;
+ 135   2          SCL  = 0;
+ 136   2          I2C_Delay();
+ 137   2        }
+ 138   1        while(--i);
+ 139   1        return(dat);
+ 140   1      }
+ 141          
+ 142          /****************************/
+ 143          void WriteNbyte(u8 addr, u8 *p, u8 number)      /*  WordAddress,First Data Address,Byte lenth */
+ 144                                                    //F0=0,right, F0=1,error
+ 145          {
+ 146   1        I2C_Start();
+ 147   1        I2C_WriteAbyte(SLAW);
+ 148   1        I2C_Check_ACK(1);
+ 149   1        if(!F0)
+ 150   1        {
+ 151   2          I2C_WriteAbyte(addr);
+ 152   2          I2C_Check_ACK(1);
+ 153   2          if(!F0)
+ 154   2          {
+ 155   3            do
+ 156   3            {
+ 157   4              I2C_WriteAbyte(*p);   p++;
+ 158   4              I2C_Check_ACK(1);
+ 159   4              if(F0)  break;
+ 160   4            }
+ 161   3            while(--number);
+ 162   3          }
+ 163   2        }
+ 164   1        I2C_Stop();
+ 165   1      }
+ 166          
+ 167          
+ 168          /****************************/
+ 169          void ReadNbyte(u8 addr, u8 *p, u8 number)       /*  WordAddress,First Data Address,Byte lenth */
+ 170                                                    //F0=0,right, F0=1,error
+ 171          {
+ 172   1        I2C_Start();
+ 173   1        I2C_WriteAbyte(SLAW);
+ 174   1        I2C_Check_ACK(1);
+ 175   1        if(!F0)
+ 176   1        {
+ 177   2          I2C_WriteAbyte(addr);
+ 178   2          I2C_Check_ACK(1);
+C51 COMPILER V9.54   PCF8574T                                                              10/13/2015 11:38:07 PAGE 4   
+
+ 179   2          if(!F0)
+ 180   2          {
+ 181   3            I2C_Start();
+ 182   3            I2C_WriteAbyte(SLAR);
+ 183   3            I2C_Check_ACK(1);
+ 184   3            if(!F0)
+ 185   3            {
+ 186   4              do
+ 187   4              {
+ 188   5                *p = I2C_ReadAbyte(); p++;
+ 189   5                if(number != 1)   S_ACK();  //send ACK
+ 190   5              }
+ 191   4              while(--number);
+ 192   4              S_NoACK();      //send no ACK
+ 193   4            }
+ 194   3          }
+ 195   2        }
+ 196   1        I2C_Stop();
+ 197   1      }
+ 198          
+ 199          //*****************************************************************************************************
+ 200          //向I2C设备写入一个字节数据
+ 201          //*****************************************************************************************************
+ 202          
+ 203          void PCF8574_Single_WriteI2C(u8 REG_Address,u8 REG_data)
+ 204          {  u8 t;
+ 205   1         t=(REG_Address << 1);
+ 206   1          I2C_Start();                  //起始信号
+ 207   1          I2C_WriteAbyte(t);   //发送设备地址+写信号
+ 208   1          I2C_WriteAbyte(REG_data);       //内部寄存器数据，
+ 209   1          I2C_Stop();                 //发送停止信号
+ 210   1      }
+ 211          
+ 212          //*******************************************************************************************************
+ 213          //从I2C设备读取一个字节数据
+ 214          //*******************************************************************************************************
+ 215          u8 PCF8574_Single_ReadI2C(u8 REG_Address)
+ 216          {
+ 217   1         u8 REG_data;
+ 218   1         u8 t;
+ 219   1        // t=(IIC_WRITE<<1);
+ 220   1        //I2C_Start();                   //起始信号
+ 221   1        //PCF8574_I2C_SendByte(PCF8574_SlaveAddress);    //发送设备地址+写信号
+ 222   1      //  I2C_WriteAbyte(t);    //发送设备地址+写信
+ 223   1        //I2C_WriteAbyte(REG_Address);     //发送存储单元地址，从0开始
+ 224   1        t=((REG_Address<<1)|0x01);  
+ 225   1        I2C_Start();                   //起始信号
+ 226   1        //PCF8574_I2C_SendByte(PCF8574_SlaveAddress+1);  //发送设备地址+读信号
+ 227   1        I2C_WriteAbyte(t);  //发送设备地址+读信号
+ 228   1        REG_data=I2C_ReadAbyte();       //读出寄存器数据
+ 229   1        I2C_Check_ACK(1);                //接收应答信号
+ 230   1        I2C_Stop();                       //停止信号
+ 231   1        return REG_data;
+ 232   1      }               
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    319    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      10
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+C51 COMPILER V9.54   PCF8574T                                                              10/13/2015 11:38:07 PAGE 5   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

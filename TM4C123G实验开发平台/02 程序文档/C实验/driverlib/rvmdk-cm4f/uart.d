@@ -1,0 +1,10 @@
+.\rvmdk-cm4f\uart.o: uart.c
+.\rvmdk-cm4f\uart.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\uart.o: ..\inc/hw_memmap.h
+.\rvmdk-cm4f\uart.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\uart.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\uart.o: ..\inc/hw_uart.h
+.\rvmdk-cm4f\uart.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\uart.o: ..\driverlib/interrupt.h
+.\rvmdk-cm4f\uart.o: ..\driverlib/uart.h
+.\rvmdk-cm4f\uart.o: ..\driverlib/sysctl.h

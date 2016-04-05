@@ -1,0 +1,9 @@
+.\rvmdk-cm4f\sysctl.o: sysctl.c
+.\rvmdk-cm4f\sysctl.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\sysctl.o: ..\inc/hw_nvic.h
+.\rvmdk-cm4f\sysctl.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\sysctl.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\sysctl.o: ..\driverlib/cpu.h
+.\rvmdk-cm4f\sysctl.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\sysctl.o: ..\driverlib/interrupt.h
+.\rvmdk-cm4f\sysctl.o: ..\driverlib/sysctl.h

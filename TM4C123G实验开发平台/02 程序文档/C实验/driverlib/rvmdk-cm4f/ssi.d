@@ -1,0 +1,9 @@
+.\rvmdk-cm4f\ssi.o: ssi.c
+.\rvmdk-cm4f\ssi.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\ssi.o: ..\inc/hw_memmap.h
+.\rvmdk-cm4f\ssi.o: ..\inc/hw_ssi.h
+.\rvmdk-cm4f\ssi.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\ssi.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\ssi.o: ..\driverlib/interrupt.h
+.\rvmdk-cm4f\ssi.o: ..\driverlib/ssi.h
+.\rvmdk-cm4f\ssi.o: ..\driverlib/sysctl.h

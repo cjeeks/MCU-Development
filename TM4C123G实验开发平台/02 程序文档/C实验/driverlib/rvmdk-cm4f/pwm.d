@@ -1,0 +1,9 @@
+.\rvmdk-cm4f\pwm.o: pwm.c
+.\rvmdk-cm4f\pwm.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\pwm.o: ..\inc/hw_memmap.h
+.\rvmdk-cm4f\pwm.o: ..\inc/hw_pwm.h
+.\rvmdk-cm4f\pwm.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\pwm.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\pwm.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\pwm.o: ..\driverlib/interrupt.h
+.\rvmdk-cm4f\pwm.o: ..\driverlib/pwm.h

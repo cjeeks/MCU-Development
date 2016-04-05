@@ -1,0 +1,62 @@
+void LCD_ShowString(u16 x,u16 y,u16 width,u16 height,u8 size,u8 *p)
+{         
+	u8 i = 0, length = 0;
+
+	u16 x0=x;
+	width+=x;
+	height+=y;
+/*
+	u8 temp = 0;	
+	u8 *Ptr = NULL; 		//声明一个空指针
+	u8 *p_old;
+	p_old = p;							//保存字符串指针地址
+	temp = *p;
+
+	for(i = 0; temp != '\0'; i++)		//获取需要显示的字符串的长度，字符长度是一个u8,汉字长度是两个u8
+	{
+		length++;
+		p++;
+		temp = *p;
+	}
+	
+	Ptr = (char *)malloc(length * sizeof(u8)); 	//请求一个连续的内存空间，用来存放需要显示的字符串
+    if (NULL == Ptr) 
+     { 
+          exit (1); 
+		} 
+
+	p = p_old;
+	temp = *p;
+
+	for(i = 0; temp != '\0'; i++)		//获取需要显示的字符串的长度，字符长度是一个u8,汉字长度是两个u8
+	{
+		Ptr[i] = temp;
+		p++;
+		temp = *p;
+	}
+	while(*Ptr)
+*/
+	while(*p)
+	{
+		if(*p>0xa1) /*显示汉字*/
+		{
+			LCD_ShowHzString(x0, y, p, RED, WHITE);
+			p += 2;
+			x0 += 16;	
+		}
+		else           /*显示字符*/
+		{
+			LCD_ShowCharString(x0, y, p);	
+			p +=1;
+			x0+= 8;
+		}
+	}
+/*
+     free(Ptr); 	//释放内存
+     Ptr = NULL; 	//清空指针地址
+		 p_old = NULL;//
+*/
+	
+}
+
+

@@ -1,0 +1,119 @@
+C51 COMPILER V9.54   KEY                                                                   10/13/2015 11:38:08 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN key.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE key\key.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\key
+                    -.lst) TABS(2) OBJECT(key.obj)
+
+line level    source
+
+   1          #include "key.h"
+   2          #include <UART\UART.h>
+   3                      
+   4          u8 play[4]  = {0x7E, 0x02, 0x0D, 0xEF};
+   5          u8 prev[4]  = {0x7E, 0x02, 0x02, 0xEF};
+   6          u8 next[4]  = {0x7E, 0x02, 0x01, 0xEF};
+   7          u8 pause[4] = {0x7E, 0x02, 0x0E, 0xEF};
+   8          
+   9          u8 mode_U[5] =      {0x7E, 0x03, 0x09, 0, 0xEF};
+  10          u8 mode_FLASH[5] =  {0x7E, 0x03, 0x09, 4, 0xEF}; 
+  11          u8 mode_TF[5] =     {0x7E, 0x03, 0x09, 1, 0xEF};  
+  12          
+  13          
+  14          
+  15          void KEY_Test(void)
+  16          {
+  17   1        u8 i = 0;
+  18   1        
+  19   1        unsigned char key_flag = 0;
+  20   1        unsigned char read_val = 0;
+  21   1        LCD_Clear(BLACK);
+  22   1        LCD_DrawRectangle(0,5, 479, 271);
+  23   1        LCD_DrawRectangle(5,18, 474, 266);
+  24   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台
+  25   1        LCD_ShowString(150,60, "Step 1:Key and Led Testing");
+  26   1        LCD_ShowString(150, 100,"Press K1,K2,K3,K4,Seee the LED");     
+  27   1        
+  28   1        while(key_flag != 0x0F)
+  29   1        {         
+  30   2          
+  31   2          LCD_ShowNum(150, 80,uart_flag, 0);
+  32   2          
+  33   2          if(strstr((const char*)gsm_ch, "OK"))
+  34   2            LCD_ShowString(200, 150, "GSM_OK!"); 
+  35   2          
+  36   2          if(KEY4 == 0)       // K1   1110 0111
+  37   2          {
+  38   3            delayms(20);
+  39   3            if(KEY4 == 0)
+  40   3            {
+  41   4              //Uart1_SendData('1');
+  42   4              while(!KEY4);
+  43   4              key_flag |= 0x01;
+  44   4              PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress, 0xE7); 
+  45   4              
+  46   4              Uart2_SendString("AT\r\n");         //GSM test
+  47   4              
+  48   4              //Uart1_SendString(mode_FLASH);       //MP3 test
+  49   4              //Delay5ms();
+  50   4              Uart1_SendString(play);       //MP3 test
+  51   4            }
+  52   3          }
+  53   2        read_val = PCF8574_Single_ReadI2C(UD_PCF8574_SlaveAddress); 
+  54   2      /////////////////////////////////////////     
+C51 COMPILER V9.54   KEY                                                                   10/13/2015 11:38:08 PAGE 2   
+
+  55   2          if((read_val & 0x80) == 0)  //OUTC1          K2  1110 0101
+  56   2          {
+  57   3            key_flag |= 0x08; 
+  58   3            Uart1_SendData('2');      
+  59   3            PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress, 0xE5); ///led2 buzzer  1111 0011
+  60   3          }
+  61   2      /////////////////////////////////////////
+  62   2        
+  63   2      /////////////////////////////////////////
+  64   2          if((read_val & 0x40) == 0)  //OUTC2          K3  1110 0001 
+  65   2          {
+  66   3            Uart1_SendData('3');
+  67   3            key_flag |= 0x04;   
+  68   3            PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress, 0xE1); ///led1  buzzer   1110 0111
+  69   3          }
+  70   2      /////////////////////////////////////////   
+  71   2          if((read_val & 0x20) == 0)  //OUTC5         K4  LED2 1111 0111
+  72   2          {
+  73   3            Uart1_SendData('4');  
+  74   3            key_flag |= 0x02;     
+  75   3            PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress, 0xF7); //led off!  1111 0101
+  76   3            
+  77   3          }
+  78   2          
+  79   2          if(strstr((const char*)gsm_ch, "OK"))
+  80   2            LCD_ShowString(200, 150, "GSM_OK!"); 
+  81   2      
+  82   2        }           
+  83   1          for(i; i < GSM_length; i++)
+  84   1          gsm_ch[i] = 0;
+  85   1          
+  86   1        for(i=0;i<BufferCount;i++)
+  87   1            BufferA[i]=0x00;
+  88   1        
+  89   1          BufferCount=0;
+  90   1          uart_flag = 0;
+  91   1      
+  92   1      }
+  93          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    459    ----
+   CONSTANT SIZE    =     93    ----
+   XDATA SIZE       =     31       3
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

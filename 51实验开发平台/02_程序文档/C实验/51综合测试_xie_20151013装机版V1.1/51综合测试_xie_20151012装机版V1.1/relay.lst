@@ -1,0 +1,42 @@
+C51 COMPILER V9.54   RELAY                                                                 10/13/2015 11:38:08 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE RELAY
+OBJECT MODULE PLACED IN relay.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE RELAY\relay.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\relay.lst) TABS(2) OBJECT(relay.obj)
+
+line level    source
+
+   1          #include "relay.h"
+   2          
+   3          
+   4          
+   5          void Relay_Test(void)
+   6          {
+   7   1        PCF8574_Single_WriteI2C(UE_PCF8574_SlaveAddress,0xA0);
+   8   1        delayms(1000);
+   9   1          
+  10   1        PCF8574_Single_WriteI2C(UE_PCF8574_SlaveAddress,0xC0);
+  11   1        delayms(1000); 
+  12   1        
+  13   1        PCF8574_Single_WriteI2C(UE_PCF8574_SlaveAddress,0x60);  
+  14   1        delayms(1000);  
+  15   1        
+  16   1        PCF8574_Single_WriteI2C(UE_PCF8574_SlaveAddress,0xf0);  
+  17   1        delayms(1000);  
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

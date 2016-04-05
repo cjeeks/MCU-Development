@@ -1,0 +1,26 @@
+C51 COMPILER V9.54   DHT11                                                                 10/13/2015 11:38:09 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DHT11
+OBJECT MODULE PLACED IN dht11.obj
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE DHT11\dht11.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\dht11.lst) TABS(2) OBJECT(dht11.obj)
+
+line level    source
+
+   1          #include "dht11.h"
+   2          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\MSP430-TIMER.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\MSP430-TIMER-1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\MSP430-TIMER-2.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\MSP430-TIMER-3.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

@@ -1,0 +1,10 @@
+.\rvmdk-cm4f\i2c.o: i2c.c
+.\rvmdk-cm4f\i2c.o: ..\inc/hw_i2c.h
+.\rvmdk-cm4f\i2c.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\i2c.o: ..\inc/hw_memmap.h
+.\rvmdk-cm4f\i2c.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\i2c.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\i2c.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\i2c.o: ..\driverlib/i2c.h
+.\rvmdk-cm4f\i2c.o: ..\driverlib/sysctl.h
+.\rvmdk-cm4f\i2c.o: ..\driverlib/interrupt.h

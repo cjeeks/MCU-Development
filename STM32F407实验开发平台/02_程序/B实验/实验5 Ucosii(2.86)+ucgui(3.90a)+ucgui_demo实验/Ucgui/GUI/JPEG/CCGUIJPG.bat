@@ -1,0 +1,31 @@
+@ECHO OFF
+ECHO CCGUIJPG.BAT:       Compiling GUI\JPG
+CALL CC GUI_JPEG
+CALL CC jcomapi
+CALL CC jdapimin
+CALL CC jdapistd
+CALL CC jdcoefct
+CALL CC jdcolor
+CALL CC jddctmgr
+CALL CC jdhuff
+CALL CC jdinput
+CALL CC jdmainct
+CALL CC jdmarker
+CALL CC jdmaster
+CALL CC jdmerge
+CALL CC jdphuff
+CALL CC jdpostct
+CALL CC jdsample
+CALL CC jdtrans
+CALL CC jerror
+CALL CC jfdctflt
+CALL CC jfdctfst
+CALL CC jfdctint
+CALL CC jidctflt
+CALL CC jidctfst
+CALL CC jidctint
+CALL CC jidctred
+CALL CC jmemmgr
+CALL CC jquant1
+CALL CC jquant2
+CALL CC jutils

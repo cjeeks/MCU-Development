@@ -1,0 +1,278 @@
+C51 COMPILER V9.54   MAIN                                                                  10/13/2015 11:38:06 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil_c51\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <intrins.h>
+   3          #include <sys\sys.h>
+   4          #include <lcd\lcd.h>
+   5          #include <font\font.h>
+   6          #include <touch\touch.h>
+   7          #include <PCF8574T\PCF8574T.h>
+   8          #include <UART\UART.h>
+   9          #include "BMP085\bmp085.h"
+  10          #include "MMA7455\MMA7455.h"
+  11          #include "ENC28J60\enc28j60_test.h"
+  12          #include "KEY\key.h"
+  13          #include "DotMatrix\Dot_Matrix.h"
+*** WARNING C317 IN LINE 26 OF DotMatrix\Dot_Matrix.h: attempt to redefine macro 'A_ONOFF'
+  14          #include "relay/relay.h"
+  15          #include "DC_motor/DC_motor.h"
+  16          #include "step_motor/step_motor.h"
+  17          #include "dht11/dht11.h"
+  18          
+  19          sbit key4=P3^2;
+  20          
+  21          
+  22          
+  23          //unsigned char RFID_count = 0;
+  24          //idata unsigned char gsm_temp[10];
+  25          //unsigned char RFID_count = 0;
+  26          
+  27           /* define constants */
+  28          #define FOSC 22118400L
+  29          #define MODE1T                      //Timer clock mode, comment this line is 12T mode, uncomment is 1T mod
+             -e
+  30          
+  31          #ifdef MODE1T
+  32          #define F38_4KHz (256-FOSC/2/38400)    //38.4KHz frequency calculation method of 1T mode
+  33          #else
+              #define F38_4KHz (256-FOSC/2/12/38400) //38.4KHz frequency calculation method of 12T mode
+              #endif
+  36          
+  37          /* define SFR */
+  38          sfr AUXR      = 0x8e;               //Auxiliary register
+  39          sfr WAKE_CLKO = 0x8f;               //wakeup and clock output control register
+  40          sfr BRT       = 0x9c;
+  41          sbit BRTCLKO  = P1^0;               //BRT clock output pin
+  42          
+  43          //-----------------------------------------------
+  44          
+  45          
+  46          void main()
+  47          { 
+  48   1        unsigned char tempdat;
+  49   1        PCF8574_Single_WriteI2C(UE_PCF8574_SlaveAddress,0xe0);    //close dc motor
+  50   1        spistar()  ;//模拟SPI初始化
+  51   1        PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress, 0xF7);   //close beep
+  52   1      
+  53   1        
+C51 COMPILER V9.54   MAIN                                                                  10/13/2015 11:38:06 PAGE 2   
+
+  54   1        Init_Uart2();
+  55   1        Init_Uart1(UART_RATE96);    //MP3
+  56   1       
+  57   1        //Init_Uart2();
+  58   1        Lcd_Init();   //tft初始化
+  59   1      
+  60   1        LCD_Clear(WHITE); //清屏
+  61   1        BACK_COLOR=BLACK;;POINT_COLOR=WHITE; 
+  62   1      
+  63   1          //showimage(); //显示40*40图片
+  64   1        LCD_Clear(BLACK);
+  65   1        LCD_DrawRectangle(0,5, 479, 271);
+  66   1        LCD_DrawRectangle(5,18, 474, 266);
+  67   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台  
+  68   1      
+  69   1        Uart1_SendString("STC12C5A60S2\r\nUart1 Test !\r\n");
+  70   1        Uart2_SendString("STC12C5A60S2\r\nUart2 Test !\r\n"); 
+  71   1        
+  72   1        //Uart2_SendData("2);
+  73   1        //Uart2_SendData("3");
+  74   1        //Uart2_SendString("x\r\nUart2 Test !\r\n");
+  75   1        
+  76   1      
+  77   1      
+  78   1        KEY_Test();           //STEP1: KEY test
+  79   1        
+  80   1        LCD_Clear(BLACK);
+  81   1        LCD_DrawRectangle(0,5, 479, 271);
+  82   1        LCD_DrawRectangle(5,18, 474, 266);
+  83   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台
+  84   1        LCD_ShowString(150,60, "Step 2:RELAY Testing");   
+  85   1        Relay_Test();           //STEP2: RELAY test
+*** WARNING C206 IN LINE 85 OF main.c: 'Relay_Test': missing function-prototype
+  86   1      
+  87   1        LCD_Clear(BLACK);
+  88   1        LCD_DrawRectangle(0,5, 479, 271);
+  89   1        LCD_DrawRectangle(5,18, 474, 266);
+  90   1        LCD_ShowString(150, 6, "--STM32F103VCT6 Platform--");  // 实验开发平台
+  91   1        LCD_ShowString(30,60, "STEP3: Temperature, humidity and smoke Sensor testing"); //
+  92   1        LCD_ShowString(150,100, "Press K1 to next module"); 
+  93   1        LCD_ShowString(50, 220, "Tips: Note of the information on the screen");   
+  94   1        
+  95   1      
+  96   1        while(KEY4)
+  97   1        { 
+  98   2            LCD_ShowString(150, 130, "temp_value:26.7 C"); 
+  99   2            LCD_ShowString(150, 160, "humi_value:35.3 RH"); 
+ 100   2          //DHT11_Test();         //STEP3: DHT11 test 
+ 101   2          //GAS_Test();
+ 102   2          //HUMAN_Test();   
+ 103   2        }
+ 104   1      
+ 105   1        LCD_Clear(BLACK);
+ 106   1        LCD_DrawRectangle(0,5, 479, 271);
+ 107   1        LCD_DrawRectangle(5,18, 474, 266);
+ 108   1        LCD_ShowString(150, 6, "--STM32F103VCT6 Platform--");  // 实验开发平台
+ 109   1        LCD_ShowString(180,60, "STEP4: RFID testing");
+ 110   1        LCD_ShowString(100, 100, "Tips: Note of the information on the screen");  
+ 111   1        
+ 112   1        Init_Uart1(UART_RATE1152);    //RFID
+ 113   1        RFID_Test();
+*** WARNING C206 IN LINE 113 OF main.c: 'RFID_Test': missing function-prototype
+C51 COMPILER V9.54   MAIN                                                                  10/13/2015 11:38:06 PAGE 3   
+
+ 114   1        //RFID_Test();          //STEP4: RFID test      
+ 115   1        delayms(2000);
+ 116   1      #if 1
+ 117   1        LCD_Clear(BLACK);
+ 118   1        LCD_DrawRectangle(0,5, 479, 271);
+ 119   1        LCD_DrawRectangle(5,18, 474, 266);
+ 120   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台
+ 121   1        LCD_ShowString(150,60, "Step 5:DC motor Testing");  
+ 122   1        LCD_ShowString(150,100, "Press K1 to next module");
+ 123   1      
+ 124   1        DC_motor_Test();            //STEP5: DC_motor test
+*** WARNING C206 IN LINE 124 OF main.c: 'DC_motor_Test': missing function-prototype
+ 125   1        delayms(2000);
+ 126   1      
+ 127   1        LCD_Clear(BLACK);
+ 128   1        LCD_DrawRectangle(0,5, 479, 271);
+ 129   1        LCD_DrawRectangle(5,18, 474, 266);
+ 130   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台
+ 131   1        LCD_ShowString(150,60, "Step 6:STEP motor Testing");
+ 132   1        
+ 133   1        STEP_motor_test();          //STEP6: STEP_motor test  
+ 134   1        delayms(2000);  
+ 135   1        
+ 136   1        LCD_Clear(BLACK);
+ 137   1        LCD_DrawRectangle(0,5, 479, 271);
+ 138   1        LCD_DrawRectangle(5,18, 474, 266);
+ 139   1        LCD_ShowString(150, 6, "--STM32F103VCT6 Platform--");  // 实验开发平台
+ 140   1        LCD_ShowString(100,60, "STEP7: Dot matrix testing");
+ 141   1        LCD_ShowString(150,100, "Press K1 to next module");
+ 142   1        LCD_ShowString(100, 100, "Tips: Observe the Dot matrix"); 
+ 143   1        while(KEY4)
+ 144   1        { 
+ 145   2          //Dot_Matrix_test();    //STEP9: Dot_Matrix test
+ 146   2        } 
+ 147   1        
+ 148   1        LCD_Clear(BLACK);
+ 149   1        LCD_DrawRectangle(0,5, 479, 271);
+ 150   1        LCD_DrawRectangle(5,18, 474, 266);
+ 151   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台  
+ 152   1        LCD_ShowString(100,60, "Step 8:temperature,pressure Testing");  
+ 153   1        LCD_ShowString(150,100, "Press K1 to next module");
+ 154   1        while(KEY4)     
+ 155   1        { 
+ 156   2          BMP085_Test();
+*** WARNING C206 IN LINE 156 OF main.c: 'BMP085_Test': missing function-prototype
+ 157   2          delayms(2000);
+ 158   2        }
+ 159   1        delayms(2000);
+ 160   1        
+ 161   1        LCD_Clear(BLACK);
+ 162   1        LCD_DrawRectangle(0,5, 479, 271);
+ 163   1        LCD_DrawRectangle(5,18, 474, 266);
+ 164   1        LCD_ShowString(150, 6, "--STM32F103VCT6 Platform--");  // 实验开发平台  
+ 165   1        LCD_ShowString(100,60, "STEP9: Acceleration testing");
+ 166   1          LCD_ShowString(150,100, "Press K1 to next module");
+ 167   1        LCD_ShowString(50, 100, "Tips: Note of the information on the screen");
+ 168   1        while(KEY4)
+ 169   1        { 
+ 170   2          MMA7455_Test();
+ 171   2          delayms(2000);
+ 172   2        }
+ 173   1        delayms(2000);
+C51 COMPILER V9.54   MAIN                                                                  10/13/2015 11:38:06 PAGE 4   
+
+ 174   1        
+ 175   1        LCD_Clear(BLACK);
+ 176   1        LCD_DrawRectangle(0,5, 479, 271);
+ 177   1        LCD_DrawRectangle(5,18, 474, 266);
+ 178   1        LCD_ShowString(150, 6, "--STC51 Platform--");  // 实验开发平台    
+ 179   1        LCD_ShowString(150, 100, "--Test Complete!--");  
+ 180   1        //Dot_Matrix_test();    //STEP9: Dot_Matrix test
+ 181   1        //delay_ms(500);  delay_ms(500);  delay_ms(500);  delay_ms(500);  delay_ms(500);
+ 182   1        //delayms(500);
+ 183   1      #endif
+ 184   1        while(1)
+ 185   1        {
+ 186   2          //RFID_Test();
+ 187   2          /*
+ 188   2          PCF8574_Single_WriteI2C(UG_PCF8574_SlaveAddress,0); 
+ 189   2          PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress,0); 
+ 190   2          PCF8574_Single_WriteI2C(UG_PCF8574_SlaveAddress,0xff);
+ 191   2          PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress,0XFF);      
+ 192   2          */
+ 193   2          //STEP_motor_test();
+ 194   2          //Dot_Matrix_test();
+ 195   2        }
+ 196   1      /*  while(1)
+ 197   1        { 
+ 198   1      
+ 199   1      
+ 200   1             tempdat=PCF8574_Single_ReadI2C(UD_PCF8574_SlaveAddress);
+ 201   1             PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress ,0);
+ 202   1             Uart1_SendData(tempdat);
+ 203   1             delayms(500);
+ 204   1             delayms(500);
+ 205   1             PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress ,0xFF);
+ 206   1             delayms(500);
+ 207   1             delayms(500);
+ 208   1          }
+ 209   1      */
+ 210   1        //PCF8574_Single_WriteI2C(UD_PCF8574_SlaveAddress ,0);  
+ 211   1         //Dot_Matrix_test();   //STEP9: Dot_Matrix test
+ 212   1         // RFID_Test();
+ 213   1         /*
+ 214   1           if(uart_flag)
+ 215   1           {
+ 216   1            uart_flag = 0;
+ 217   1            LCD_ShowString(150, 160,gsm_temp);
+ 218   1           }
+ 219   1           
+ 220   1      
+ 221   1      }*/
+ 222   1          //RFID_Test(); 
+ 223   1          //delayms(2000); 
+ 224   1          //Dot_Matrix_test();
+ 225   1          //DC_motor_Test();
+ 226   1          //LCD_ShowString(150, 150, "--test--");
+ 227   1      
+ 228   1      
+ 229   1        /*
+ 230   1        while(0)
+ 231   1        {
+ 232   1           if(jiance()) //检测触摸和按键
+ 233   1          { 
+ 234   1            showimage(); //显示40*40图片
+ 235   1          }
+C51 COMPILER V9.54   MAIN                                                                  10/13/2015 11:38:06 PAGE 5   
+
+ 236   1          if(ref){showimage();} //显示40*40图片
+ 237   1          }
+ 238   1        */
+ 239   1      
+ 240   1      }
+*** WARNING C280 IN LINE 48 OF main.c: 'tempdat': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1232    ----
+   CONSTANT SIZE    =    492    ----
+   XDATA SIZE       =   ----       1
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  6 WARNING(S),  0 ERROR(S)

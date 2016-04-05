@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<TKStudioProject Name="TOUCH" BuildTool="15" ToolVer="default" Version="3.00" Author="YinHandong[Òüº®¶¬]" ProjectGUID="{D1183430-241C-4231-8CB4-7DAC4BF0371A}">
+    <Configurations>
+        <Configuration Name="Target 1" OPTDBG="1,-1,1,0,1,1,()" DEVICE="STM32F103VE" VENDOR="STMicroelectronics" FAMINY="3" CPU='CPU=IRAM(0x20000000-0x2000FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) CPUTYPE(&quot;Cortex-M3&quot;)' RGF='REGFILE=stm32f10x_lib.h(&quot;ST\STM32F10x&quot;)' MONDL='MON=SARMCM3.DLL TARMSTM.DLL(&quot;-pSTM32F10x&quot;)' SIMDL='SIM=SARMCM3.DLL  DARMSTM.DLL(&quot;-pSTM32F103VE&quot;)' SIMCLK="24.000000" OP="0" XROM="0,0,0,0#0,0,0,0#0,0,0,0" XRAM="0,0,0,0#0,0,0,0#0,0,0,0" OldName="Target 1" OutBig="0" McLib="0" CLK="24.000000" Cross="0" IROM="1,0x08000000,0x00080000,1#0,0,0,0" IRAM="1,0x20000000,0x00010000,0#0,0,0,0" OldCPU="STM32F103VE">
+            <MDK_Output OutName="0,.\Target 1\TOUCH" OutType="1" OutBatch="0" OutHex="1" OutList="0,.\Target 1" Debug="1" Browse="1" />
+            <MDK_User BfC="0,()#0,()" BfB="0,()#0,()" AfB="0,()#0,()" Beep="1" SDebug="0" />
+            <MDK_CParam Def="STM32F10X_HD USE_STDPERIPH_DRIVER" uDef="" Inc="..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\RTC;..\HARDWARE\RTC;..\HARDWARE\WKUP;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\DMA;..\HARDWARE\IIC;..\HARDWARE\24CXX;..\HARDWARE\SPI;..\HARDWARE\FLASH;..\HARDWARE\TOUCH" Misc="" Opt="0,0" Code="0,1,0,0,0,0" Language="0,0,0,0" List="0" />
+            <MDK_AsmParam Def="" uDef="" Inc="" Misc="" Code="1,0,0,0,0,0" Language="0" List="1,1" />
+            <MDK_Linker Misc="" UseDef="1" Code="0,0,0,1,()" Sct="" List="1,1,1,1,1,1,1,1,1" first="" />
+            <MDK_Debug DbgType="0" sfSIM="0,1,(),()" hwSIM="1,1,1,()" Drv="(),()" SrvOpt="" />
+            <DeviceProperties Item0='CPU=IRAM(0x20000000-0x2000FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) CPUTYPE(&quot;Cortex-M3&quot;)' Item1='FLDLL=UL2CM3(-O14 -S0 -C0 -N00(&quot;ARM Cortex-M3&quot;) -D00(1BA00477) -L00(4) -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F10x_512 -FS08000000 -FL080000)' Item2='MON=SARMCM3.DLL TARMSTM.DLL(&quot;-pSTM32F10x&quot;)' Item3='REGFILE=stm32f10x_lib.h(&quot;ST\STM32F10x&quot;)' Item4='SFILE=&quot;STARTUP\ST\startup_stm32f10x_hd.s&quot; (&quot;STM32 High Density Line Startup Code&quot;)' Item5='SIM=SARMCM3.DLL  DARMSTM.DLL(&quot;-pSTM32F103VE&quot;)' />
+            <DeviceDescription Description="ARM 32-bit Cortex-M3 Microcontroller, 72MHz, 512kB Flash, 64kB SRAM,&#x0D;&#x0A;External Memory Interface (EMI) for SDRAM, SRAM, Flash, ROM,&#x0D;&#x0A;PLL, Embedded Internal RC 8MHz and 32kHz, Real-Time Clock,&#x0D;&#x0A;Nested Interrupt Controller, Power Saving Modes, JTAG and SWD,&#x0D;&#x0A;4 Synch. 16-bit Timers with Input Capture, Output Compare and PWM,&#x0D;&#x0A;2 16-bit Advanced Timer, 2 16-bit Basic Timer, 2 16-bit Watchdog Timers,&#x0D;&#x0A;SysTick Timer, 3 SPI/I2S, 2 I2C, 5 USART, USB 2.0 Full Speed Interface,&#x0D;&#x0A;CAN 2.0B Active, 3 12-bit 16-ch A/D Converter, 2 12-bit D/A Converter, &#x0D;&#x0A;SDIO, Fast I/O Ports" />
+        </Configuration>
+    </Configurations>
+    <Files>
+        <Filter Name="USER">
+            <File RelativePath=".\system_stm32f10x.c" FileType="1" Output="system_stm32f10x.o" ro="0" bss="0" rw="0" />
+            <File RelativePath=".\stm32f10x_it.c" FileType="1" Output="stm32f10x_it.o" ro="0" bss="0" rw="0" />
+            <File RelativePath=".\main.c" FileType="1" Output="main.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="HARDWARE">
+            <File RelativePath="..\HARDWARE\TOUCH\touch.c" FileType="1" Output="touch.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\FLASH\flash.c" FileType="1" Output="flash.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\SPI\spi.c" FileType="1" Output="spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\24CXX\24cxx.c" FileType="1" Output="24cxx.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\IIC\myiic.c" FileType="1" Output="myiic.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\LCD\lcd.c" FileType="1" Output="lcd.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\KEY\key.c" FileType="1" Output="key.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\HARDWARE\LED\led.c" FileType="1" Output="led.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="SYSTEM">
+            <File RelativePath="..\SYSTEM\usart\usart.c" FileType="1" Output="usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\SYSTEM\sys\sys.c" FileType="1" Output="sys.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\SYSTEM\delay\delay.c" FileType="1" Output="delay.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="CORE">
+            <File RelativePath="..\CORE\startup_stm32f10x_hd.s" FileType="2" Output="startup_stm32f10x_hd.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\CORE\core_cm3.c" FileType="1" Output="core_cm3.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="FWLib">
+            <File RelativePath="..\STM32F10x_FWLib\src\misc.c" FileType="1" Output="misc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\STM32F10x_FWLib\src\stm32f10x_usart.c" FileType="1" Output="stm32f10x_usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\STM32F10x_FWLib\src\stm32f10x_spi.c" FileType="1" Output="stm32f10x_spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\STM32F10x_FWLib\src\stm32f10x_rcc.c" FileType="1" Output="stm32f10x_rcc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\STM32F10x_FWLib\src\stm32f10x_gpio.c" FileType="1" Output="stm32f10x_gpio.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\STM32F10x_FWLib\src\stm32f10x_fsmc.c" FileType="1" Output="stm32f10x_fsmc.o" ro="0" bss="0" rw="0" />
+        </Filter>
+    </Files>
+</TKStudioProject>

@@ -1,0 +1,9 @@
+.\rvmdk-cm4f\can.o: can.c
+.\rvmdk-cm4f\can.o: ..\inc/hw_can.h
+.\rvmdk-cm4f\can.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\can.o: ..\inc/hw_nvic.h
+.\rvmdk-cm4f\can.o: ..\inc/hw_memmap.h
+.\rvmdk-cm4f\can.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\can.o: ..\driverlib/can.h
+.\rvmdk-cm4f\can.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\can.o: ..\driverlib/interrupt.h

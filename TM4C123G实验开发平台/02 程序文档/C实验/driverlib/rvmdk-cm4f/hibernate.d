@@ -1,0 +1,9 @@
+.\rvmdk-cm4f\hibernate.o: hibernate.c
+.\rvmdk-cm4f\hibernate.o: ..\inc/hw_hibernate.h
+.\rvmdk-cm4f\hibernate.o: ..\inc/hw_ints.h
+.\rvmdk-cm4f\hibernate.o: ..\inc/hw_sysctl.h
+.\rvmdk-cm4f\hibernate.o: ..\inc/hw_types.h
+.\rvmdk-cm4f\hibernate.o: ..\driverlib/debug.h
+.\rvmdk-cm4f\hibernate.o: ..\driverlib/hibernate.h
+.\rvmdk-cm4f\hibernate.o: ..\driverlib/sysctl.h
+.\rvmdk-cm4f\hibernate.o: ..\driverlib/interrupt.h

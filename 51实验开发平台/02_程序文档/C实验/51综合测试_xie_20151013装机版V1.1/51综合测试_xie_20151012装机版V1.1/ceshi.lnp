@@ -1,0 +1,23 @@
+"STARTUP.obj",
+"main.obj",
+"LCD.obj",
+"sys.obj",
+"font.obj",
+"touch.obj",
+"PCF8574T.obj",
+"UART.obj",
+"bmp085.obj",
+"MMA7455.obj",
+"enc28j60_test.obj",
+"enc28j60.obj",
+"spi.obj",
+"uip_arch.obj",
+"uip_arp.obj",
+"key.obj",
+"Dot_Matrix.obj",
+"relay.obj",
+"DC_motor.obj",
+"step_motor.obj",
+"dht11.obj" 
+TO "ceshi" 
+RAMSIZE(256) 
